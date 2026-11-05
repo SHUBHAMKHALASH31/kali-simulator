@@ -234,35 +234,12 @@
       .imp-item span{color:#9fb2c8;display:block;}
       .legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;margin:6px 0;}
       .sw{display:inline-block;width:11px;height:11px;border-radius:3px;vertical-align:-1px;margin-right:5px;}
-      /* --- Creator credit + Help AI (Support) --- */
+      /* --- Creator credit --- */
       .credit-chip{flex:none;background:linear-gradient(145deg,#2f6fd0,#173a68);border:1px solid #6ea8ec;color:#fff;border-radius:20px;padding:2px 11px;font-size:12px;font-weight:700;font-family:"JetBrains Mono",monospace;white-space:nowrap;}
       .login-credit{margin:0 0 6px;color:#a9cdf7;font-size:13.5px;}
       .login-credit b{color:#7ee787;}
       .login-foot{margin:14px 0 0;padding-top:10px;border-top:1px solid rgba(90,130,180,.3);color:#8494a9;font-size:12px;}
       .login-foot b{color:#cfe0f5;}
-      .support-fab{position:fixed;right:14px;bottom:118px;z-index:600;background:linear-gradient(145deg,#2f6fd0,#1a4076);color:#fff;border:1px solid #6ea8ec;border-radius:24px;padding:10px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 12px 28px rgba(0,0,0,.5);}
-      .support-fab:hover{filter:brightness(1.15);}
-      .support-panel{position:fixed;right:14px;bottom:14px;z-index:650;width:min(380px,calc(100vw - 20px));height:min(560px,72dvh);background:#0e1622;border:1px solid #3a639c;border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.6);display:none;flex-direction:column;overflow:hidden;color:#dbe4f0;}
-      .support-panel.open{display:flex;}
-      .sup-head{background:#16233a;padding:10px 12px;border-bottom:1px solid #26395a;display:flex;gap:8px;align-items:flex-start;}
-      .sup-head .st{flex:1;min-width:0;}
-      .sup-head b{font-size:14.5px;color:#eaf2fc;display:block;}
-      .sup-head span{font-size:11.5px;color:#9fb2c8;line-height:1.4;display:block;}
-      .sup-head button{background:#1d2f4d;border:1px solid #33507c;color:#cfe0f5;border-radius:6px;width:28px;height:26px;cursor:pointer;flex:none;}
-      .sup-msgs{flex:1;overflow-y:auto;padding:10px 12px;display:flex;flex-direction:column;gap:8px;font-size:13.5px;line-height:1.5;}
-      .sup-msg{max-width:92%;padding:8px 11px;border-radius:11px;white-space:pre-wrap;word-break:break-word;}
-      .sup-msg.bot{background:#12203a;border:1px solid #26395a;align-self:flex-start;}
-      .sup-msg.me{background:#2f6fd0;color:#fff;align-self:flex-end;}
-      .sup-msg code{font-family:"JetBrains Mono",monospace;background:#0a121f;border:1px solid #33507c;border-radius:5px;padding:1px 6px;font-size:12.5px;color:#7ee787;display:inline-block;margin:2px 0;word-break:break-all;}
-      .sup-msg .runbtn{display:inline-block;margin-top:6px;background:#2f6fd0;color:#fff;border:1px solid #5b8def;border-radius:7px;padding:5px 11px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;}
-      .sup-chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px;border-top:1px solid #26395a;background:#0c1420;}
-      .sup-chips button{background:#1a2a44;border:1px solid #33507c;color:#cfe0f5;border-radius:16px;padding:4px 10px;font-size:12px;cursor:pointer;font-family:inherit;}
-      .sup-chips button:hover{background:#2a4470;color:#fff;}
-      .sup-form{display:flex;gap:6px;padding:8px 12px;border-top:1px solid #26395a;background:#0c1420;}
-      .sup-form input{flex:1;min-width:0;background:#0a121f;border:1px solid #33507c;border-radius:7px;color:#eaf2fc;padding:8px 10px;font-size:16px;font-family:inherit;outline:none;}
-      @media (min-width:921px){ .sup-form input{font-size:13.5px;} }
-      .sup-form input:focus{border-color:#5b8def;}
-      .sup-foot{padding:5px 12px 8px;background:#0c1420;font-size:11px;color:#8494a9;}
 
       @media (max-width:700px){
         .desk-icons{width:62px;padding:10px 3px;}
@@ -294,7 +271,6 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
   .taskbar .tbtn,.tbtn{min-height:44px;}
   .topbtn{min-height:36px;padding:6px 10px;}
   .kmenu{min-height:36px;}
-  .support-fab{bottom:126px;right:10px;padding:10px 14px;}
   .login-card{padding:22px 16px 16px;}
   .dicon{min-height:52px;}
 }
@@ -336,7 +312,7 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
           <button type="button" class="dicon" data-act="pad"><span class="glyph">&#9998;</span><span class="lbl">Mousepad</span></button>
           <button type="button" class="dicon" data-act="user"><span class="glyph usr">&#9787;</span><span class="lbl">Users / Settings</span></button>
           <button type="button" class="dicon" data-act="help"><span class="glyph">?</span><span class="lbl">Help</span></button>
-          <button type="button" class="dicon" data-act="support"><span class="glyph" style="color:#7ee787;">&#128172;</span><span class="lbl">Help AI</span></button>
+          <button type="button" class="dicon" data-act="levels"><span class="glyph" style="color:#e8c15a;">&#9733;</span><span class="lbl">Levels</span></button>
           <button type="button" class="dicon" data-act="import"><span class="glyph" style="color:#e8c15a;">⇪</span><span class="lbl">Notes Import</span></button>
           <button type="button" class="dicon" data-act="upload"><span class="glyph" style="color:#7ee787;">⬆</span><span class="lbl">Upload File</span></button>
         </nav>
@@ -486,6 +462,18 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
         </div>
       </section>
 
+      <!-- ================= LEVELS ================= -->
+      <section class="window wide" id="levelsWin" aria-label="Levels - beginner learning path">
+        <div class="win-head"><span class="wt">★ Levels — Level 0 se seekho (Beginners ke liye)</span>
+          <div class="win-ctl"><button type="button" data-min="levelsWin" title="Minimize">—</button><button type="button" class="cx" data-close="levelsWin" title="Band karo">✕</button></div></div>
+        <div class="win-body">
+          <p style="margin:0 0 6px;">Ye <b>optional</b> hai — sirf unke liye jo <b>step-by-step</b> seekhna chahte hain. Bina levels ke bhi pura terminal hamesha free hai, jaise chaaho practice karo.</p>
+          <p class="fm-prev" style="margin:0 0 10px;">Har level me ek chhota <b>lesson</b> aur ek <b>task</b> hai. Task ko <b>terminal</b> me pura karo — level apne aap complete ho jayega aur agla level khul jayega. Tumhari progress aur pura kaam isi browser me <b>auto-save</b> hota rehta hai.</p>
+          <div id="levelsList"></div>
+          <div id="levelDetail" style="margin-top:12px;"></div>
+        </div>
+      </section>
+
       <!-- ================= HELP ================= -->
       <section class="window" id="helpWin" aria-label="Help">
         <div class="win-head"><span class="wt">Help — Kaise practice karein</span>
@@ -493,8 +481,8 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
         <div class="win-body help-sec">
           <h3>Banane wala (Creator)</h3>
           <p>Ye simulator <b style="color:#7ee787;">Shubham</b> ne banaya hai — apne students ke liye, taaki wo bina asli system bigade yahin free me Kali ki poori practice kar saken.</p>
-          <h3>Help AI — command me atke to yahan poochho</h3>
-          <p>Neeche right side wala <b>💬 Help AI</b> button (ya desktop/taskbar ka Help AI icon) kholo aur apna doubt likho — jaise <code>steghide embed kaise karu?</code> ya <code>command not found aa raha hai</code>. Ye sirf <b>is simulator aur iske commands</b> ke sawalon ke jawab deta hai — dusre topic (news, gana, homework waghera) yahan nahi chalenge, aur kisi asli system/account par hamle ki madad bhi nahi milegi; har jawab yahin ki practice tak seemit hai. Terminal me <code>support</code> likhne se bhi ye khul jata hai.</p>
+          <h3>Beginner ho? ★ Levels se shuru karo</h3>
+          <p>Desktop ya taskbar par <b>★ Levels</b> wala option kholo — wahan <b>Level 0</b> se step-by-step seekhna shuru hota hai: pehle terminal ki pehchan, phir files banana-padna, phir asli practice (user banana, steghide, openssl) tak. Har level me ek chhota lesson aur ek task milta hai; task terminal me pura karte hi agla level khul jata hai. Levels bilkul <b>optional</b> hain — bina inke bhi pura terminal hamesha free hai, jaise chaaho practice karo. Kisi command ki detail chahiye to <b>Kali Tools</b> window aur neeche wali Commands list me sab milega.</p>
           <h3>Ye kya hai?</h3>
           <p>Ye ek pura Kali jaisa practice desktop hai — Terminal, Firefox, Files, Mousepad aur saare bade tools, sab simulated. Asli system par kuch nahi hota, isliye bina dare har command try karo.</p>
           <h3>Firefox se GitHub tool clone karna</h3>
@@ -528,13 +516,13 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
         <button type="button" class="tbtn" data-act="tools">&#9783;<small>Tools</small></button>
         <button type="button" class="tbtn" data-act="user">&#9787;<small>Users</small></button>
         <button type="button" class="tbtn" data-act="help">?<small>Help</small></button>
-        <button type="button" class="tbtn" data-act="support">&#128172;<small>Help AI</small></button>
+        <button type="button" class="tbtn" data-act="levels">&#9733;<small>Levels</small></button>
         <button type="button" class="tbtn" data-act="import">⇪<small>Import</small></button>
         <button type="button" class="tbtn" data-act="upload">⬆<small>Upload</small></button>
       </nav>
 
       <div class="utilbar">
-        <p><strong>Free practice terminal</strong> — likhte hi rang batata hai command sahi hai ya galat. Apni file <strong>⬆ Upload</strong> se andar lao, notes ki commands <strong>Notes Import</strong> se jodo. Command samajh na aaye to neeche <strong>💬 Help AI</strong> se poochho. · Banane wala: <strong>Shubham</strong> — students ke liye free practice.</p>
+        <p><strong>Free practice terminal</strong> — likhte hi rang batata hai command sahi hai ya galat. Apni file <strong>⬆ Upload</strong> se andar lao, notes ki commands <strong>Notes Import</strong> se jodo. Beginner ho to <strong>★ Levels</strong> khol kar Level 0 se step-by-step shuru karo. · Banane wala: <strong>Shubham</strong> — students ke liye free practice.</p>
         <p class="kbd-tip"><kbd>↑</kbd><kbd>↓</kbd> purani commands · <kbd>Tab</kbd> naam pura karo · <kbd>Ctrl</kbd>+<kbd>L</kbd> screen saaf · <kbd>Ctrl</kbd>+<kbd>C</kbd> rok do</p>
       </div>
     </div>
@@ -558,29 +546,6 @@ button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
     </div>
     <input type="file" id="realFileInput" multiple style="display:none;" />
     <div class="toast" id="toast" role="status"></div>
-
-    <!-- ================= HELP AI (SUPPORT) ================= -->
-    <button type="button" class="support-fab" id="supportFab" aria-label="Help AI kholo">💬 Help AI</button>
-    <div class="support-panel" id="supportPanel" role="dialog" aria-label="Help AI — command support">
-      <div class="sup-head">
-        <div class="st"><b>Help AI — Command Support</b><span>Sirf is simulator aur iske commands ke sawal poochho — dusre topic yahan nahi chalenge.</span></div>
-        <button type="button" id="supportClose" title="Band karo">✕</button>
-      </div>
-      <div class="sup-msgs" id="supportMsgs"></div>
-      <div class="sup-chips" id="supportChips">
-        <button type="button" data-q="steghide embed kaise karu?">steghide embed kaise karu?</button>
-        <button type="button" data-q="openssl se encrypt kaise karu?">openssl encrypt</button>
-        <button type="button" data-q="nmap kaise chalau?">nmap kaise chalau?</button>
-        <button type="button" data-q="command not found aa raha hai">command not found aa raha hai</button>
-        <button type="button" data-q="apni photo upload kaise karu?">photo upload kaise karu?</button>
-        <button type="button" data-q="git clone kaise karu?">git clone kaise karu?</button>
-      </div>
-      <form class="sup-form" id="supportForm">
-        <input id="supportInput" type="text" placeholder="Apna command doubt likho..." autocomplete="off" spellcheck="false" aria-label="Help AI se sawal likho" />
-        <button type="submit" class="wbtn" id="supportSend">Poochho</button>
-      </form>
-      <div class="sup-foot">Help AI sirf simulator ki madad ke liye hai — galat istemal ke sawalon ke jawab nahi milenge. Ek session me seemit sawal hi pooch sakte ho.</div>
-    </div>
 
     <!-- ================= COMMANDS MODAL ================= -->
     <div class="modal-back" id="cmdModal">
@@ -2475,6 +2440,7 @@ async function submitCurrent(){
   if (raw){ HIST.push(raw); histIdx = HIST.length; }
   busy = true;
   try { await execLine(raw); } catch(e){ printLine(esc("simulator error: " + e.message), "err"); }
+  try { if (typeof SIMHOOK === "function") SIMHOOK(raw); } catch(e){}
   busy = false;
   if (!edState){ restoreRowSymbols(); setStdPrompt(); inputEl.focus(); }
   scrollDown();
@@ -3934,7 +3900,7 @@ function doAct(act){
   else if (act === "files-docs"){ FM_CWD = "/home/shubham/Documents"; openWin("filesWin"); }
   else if (act === "files-down"){ FM_CWD = "/home/shubham/Downloads"; openWin("filesWin"); }
   else if (act === "import") openWin("importWin");
-  else if (act === "support"){ if (typeof toggleSupport === "function") toggleSupport(); }
+  else if (act === "levels"){ openWin("levelsWin"); if (typeof renderLevels === "function") renderLevels(); }
   else if (act === "upload"){ triggerUpload(cwd); toast("File picker khul raha hai — file chunoge to wo <b>" + esc(cwd) + "</b> me aa jayegi (ls me dikhegi)."); }
 }
 function initDesktop(){
@@ -4000,278 +3966,249 @@ function initDesktop(){
   setTimeout(function(){ toast("<b>Pura Kali desktop tayyar hai!</b> Terminal neeche hai, Firefox se GitHub clone karke dekho — Help window me sab samjhaya hai."); }, 700);
 }
 
-/* ================================================================
-   HELP AI — bounded, offline, rule-based command support.
-   Sirf is simulator ke commands/workflows ke jawab deta hai.
-   Koi network call nahi, koi asli AI model nahi — saare jawab
-   neeche wale knowledge base se bante hain.
-   ================================================================ */
-var SUPPORT_COUNT = 0, SUPPORT_LIMIT = 20, SUPPORT_BUSY = false, SUPPORT_GREETED = false;
-
-var SUP_BASIC = {
-  ls:"ls — current folder ki files/folders list karta hai. Detail ke liye: ls -la",
-  cd:"cd — folder badalta hai. cd .. = ek upar, cd - = purani jagah, cd ~/Desktop/task = seedha task folder",
-  pwd:"pwd — tum abhi kis folder me ho, wo pura path dikhata hai",
-  cat:"cat — text file ka content padhta hai. Jaise: cat msg.txt",
-  echo:"echo — text print karta hai, aur > se file me likhta hai. Jaise: echo \"hello\" > note.txt",
-  touch:"touch — khali file banata hai. Jaise: touch nayi.txt",
-  mkdir:"mkdir — naya folder banata hai. Jaise: mkdir practice",
-  rm:"rm — file delete karta hai, folder ke liye rm -r folder. Dhyaan: delete wapas nahi aata",
-  cp:"cp — file copy karta hai. Jaise: cp car.jpeg copy.jpeg",
-  mv:"mv — file move ya rename karta hai. Jaise: mv purana.txt naya.txt",
-  nano:"nano — terminal ke andar file edit karne wala editor. Ctrl+O = save, Ctrl+X = bahar",
-  vim:"vim — doosra editor. i = likhna shuru, Esc phir :wq = save karke bahar",
-  grep:"grep — file ke andar shabd/pattern dhundta hai. Jaise: grep secret msg.txt",
-  find:"find — naam se file dhundta hai. Jaise: find . -name \"*.txt\"",
-  head:"head — file ki pehli 10 line dikhata hai",
-  tail:"tail — file ki aakhri 10 line dikhata hai",
-  clear:"clear — terminal screen saaf karta hai (Ctrl+L bhi wahi karta hai)",
-  history:"history — ab tak chalaye gaye commands ki list dikhata hai. ↑ ↓ keys se purane commands bhi wapas aate hain",
-  whoami:"whoami — abhi kis user se logged in ho, wo batata hai",
-  sudo:"sudo — command ko root power se chalata hai. Pehli baar password poochhega (practice me kuch bhi chalega)",
-  chmod:"chmod — file ki permission badalta hai. Jaise: chmod +x script.sh (chalane layak banana)",
-  ping:"ping — koi host/server reachable hai ya nahi, ye check karta hai. Jaise: ping google.com",
-  curl:"curl — kisi URL ka content terminal me lata hai. Jaise: curl example.com",
-  wget:"wget — internet se file download karke isi folder me rakhta hai. Dobara download par file.1 banti hai",
-  git:"git — code/repos ke liye. git clone <url> repo download karta hai, cd karke andar jao",
-  python3:"python3 — Python chalata hai. python3 file.py = script chalao, sirf python3 = REPL (>>> par code try karo)",
-  apt:"apt — packages install/update karta hai. apt update = list fresh, apt install <naam> = tool install",
-  man:"man — kisi command ki detail wali madad. Jaise: man steghide",
-  help:"help — terminal me chalne wale main commands ki list ek saath dikhata hai",
-  download:"download — simulator ki file ko tumhare device par download karta hai. Jaise: download car.jpeg (ye is simulator ka khaas command hai)",
-  upload:"upload — tumhari asli file simulator ke andar lata hai (upar wala ⬆ Upload button bhi wahi karta hai)",
-  useradd:"useradd — naya user banata hai. Phir su - <naam> se us user me jao",
-  su:"su — user switch karta hai. su - rahul = rahul ban jao, su - root = wapas root",
-  steghide:"steghide — photo/audio file ke andar message chhupata hai (embed) aur nikalta hai (extract)",
-  openssl:"openssl — files ko password se encrypt/decrypt karta hai (enc command)",
-  gpg:"gpg — GnuPG encryption. gpg -c file = encrypt (file.gpg), gpg -d file.gpg = decrypt",
-  base64:"base64 — data ko base64 me badalta hai (encoding hai, encryption nahi). base64 file",
-  md5sum:"md5sum / sha256sum — file ka hash (fingerprint) nikalta hai, file badli hai ya nahi check karne ke liye",
-  sha256sum:"md5sum / sha256sum — file ka hash (fingerprint) nikalta hai, file badli hai ya nahi check karne ke liye",
-  strings:"strings — binary/photo file ke andar chhupe padhne layak shabd dikhata hai",
-  exiftool:"exiftool — photo/file ki metadata (camera, date, size) padhta hai",
-  file:"file — koi file asal me kis type ki hai, ye batata hai, naam ke extension par nahi jata",
-  msfconsole:"msfconsole — Metasploit console kholta hai. Andar: search <naam>, use <module>, show options, run"
-};
-var SUP_USAGE = {
-  nmap:"nmap 127.0.0.1",
-  sqlmap:"sqlmap -u http://testphp.vulnweb.com/listproducts.php?cat=1",
-  hydra:"hydra -l admin -P rockyou.txt ssh://127.0.0.1",
-  john:"john hashes.txt",
-  hashcat:"hashcat -m 0 hash.txt wordlist.txt",
-  gobuster:"gobuster dir -u http://127.0.0.1 -w common.txt",
-  msfconsole:"msfconsole",
-  sherlock:"sherlock koi_username",
-  steghide:"steghide embed -ef msg.txt -cf car.jpeg",
-  openssl:"openssl enc -aes-256-cbc -salt -in car.jpeg -out car.jpeg.enc",
-  gpg:"gpg -c msg.txt",
-  nikto:"nikto -h http://127.0.0.1",
-  nuclei:"nuclei -u http://127.0.0.1",
-  wifite:"wifite",
-  searchsploit:"searchsploit apache",
-  dirb:"dirb http://127.0.0.1",
-  ffuf:"ffuf -u http://127.0.0.1/FUZZ -w common.txt",
-  whatweb:"whatweb http://127.0.0.1",
-  netcat:"nc -lvnp 4444",
-  nc:"nc -lvnp 4444",
-  crunch:"crunch 4 6 abcd -o wordlist.txt"
-};
-function supRunBtn(cmd){
-  return '<br><button type="button" class="runbtn" data-run="' + esc(cmd) + '">▶ Terminal me chalao: ' + esc(cmd) + '</button>';
-}
-function supKnownNames(){
-  var names = {};
-  try { Object.keys(CMDS).forEach(function(k){ names[k] = true; }); } catch(e){}
-  try { Object.keys(TOOL_INFO).forEach(function(k){ names[k] = true; }); } catch(e){}
-  try { Object.keys(CUSTOM_CMDS).forEach(function(k){ names[k] = true; }); } catch(e){}
-  try { Object.keys(SUP_BASIC).forEach(function(k){ names[k] = true; }); } catch(e){}
-  return names;
-}
-function supLev(a, b){
-  var m = a.length, n = b.length, d = [], i, j;
-  for (i = 0; i <= m; i++){ d.push([i]); }
-  for (j = 0; j <= n; j++){ d[0][j] = j; }
-  for (i = 1; i <= m; i++) for (j = 1; j <= n; j++)
-    d[i][j] = Math.min(d[i-1][j] + 1, d[i][j-1] + 1, d[i-1][j-1] + (a.charAt(i-1) === b.charAt(j-1) ? 0 : 1));
-  return d[m][n];
-}
-function supClosest(word, names){
-  var best = null, bestD = 3;
-  Object.keys(names).forEach(function(k){
-    if (Math.abs(k.length - word.length) > 2) return;
-    var d = supLev(word, k);
-    if (d < bestD){ bestD = d; best = k; }
-  });
-  return bestD <= 2 ? best : null;
-}
-function supToolAnswer(name, q){
-  var isWhat = /(kya hai|kya hota|matlab|what is|batao|samjha)/.test(q);
-  var custom = (typeof CUSTOM_CMDS !== "undefined" && CUSTOM_CMDS[name]) ? true : false;
-  var basic = SUP_BASIC[name] || null;
-  var info = (typeof TOOL_INFO !== "undefined" && TOOL_INFO[name]) ? TOOL_INFO[name][0] : null;
-  var usage = SUP_USAGE[name] || null;
-  var desc = basic || info || (custom ? "Ye command tumhari notes se import hui hai — is session me terminal me chalti hai." : "Ye is simulator ka ek chalne wala command/tool hai.");
-  if (!usage){
-    if (basic){ var m = basic.match(/Jaise: ([^.,]+)/); usage = m ? (name + " " + m[1].replace(new RegExp("^" + name + "\\s*"), "")) : (name + " --help"); if (usage.indexOf(name) !== 0) usage = name + " --help"; }
-    else if (typeof toolCatOf === "function" && /Web|Vulnerab/.test(toolCatOf(name))) usage = name + " -u http://127.0.0.1";
-    else if (typeof toolCatOf === "function" && /Password/.test(toolCatOf(name))) usage = name + " --help";
-    else usage = name + " 127.0.0.1";
-  }
-  var head = isWhat ? ("<b>" + esc(name) + "</b> — " + esc(desc)) : ("<b>" + esc(name) + "</b> aise chalega:");
-  return head + "<br>Terminal me try karo:<br><code>" + esc(usage) + "</code>" + supRunBtn(usage) +
-    "<br>Poori detail ke liye pehle <code>" + esc(name) + " --help</code> chalao" + (basic || info ? "" : "") + " — is simulator me ye chalta hai.";
-}
-function supAnswer(rawQ){
-  var q = String(rawQ || "").trim();
-  var low = " " + q.toLowerCase().replace(/[^a-z0-9@.\- ]+/g, " ") + " ";
-  /* ---- namaste / greeting ---- */
-  if (/^\s*(hi|hii+|hello|hey|namaste|namaskar|hlo)\b/.test(low) && low.trim().split(/\s+/).length <= 4)
-    return "Namaste! Mai <b>Help AI</b> hu — is simulator ka support. Jis command me atke ho, uska naam likho (jaise <code>steghide</code>, <code>nmap</code>) ya apna error likh do, mai yahin se samjha dunga.";
-  /* ---- galat istemal: kisi aur ke account/system ki baat ---- */
-  if (/(dusre ka|kisi aur ka|kisi ka|uska|uske|padosi|neighbour|neighbor|teacher ka|friend ka|dost ka|bina permission|bina ijazat|bina bataye)/.test(low) &&
-      /(hack|password|wifi|account|instagram|whatsapp|facebook|gmail|mobile|phone)/.test(low))
-    return "Is kaam me mai madad nahi kar sakta — kisi aur ke account, WiFi ya system par bina permission kuch karna galat hai, aur ye support sirf is simulator ki practice ke liye hai. Yahan ke practice tools tum apni hi lab/practice files par hi try karo — jaise terminal me <code>wifite</code> ya <code>aircrack-ng --help</code> likh kar dekho, simulated result milega.";
-  /* ---- off-topic ---- */
-  if (/(poem|kavita|shayari|kahani|story|joke|chutkula|news|samachar|khabar|weather|mausam|cricket|ipl|score|match kab|movie|film|song|gana|gaana|recipe|khana banana|pakwan|essay|nibandh|homework|grih karya|\bmath(s)?\b.*(solve|question|sawal|ka jawab)|solve.*(kar|karo)|translate|anuvaad|tarjuma|girlfriend|boyfriend|pyaar|love|politics|rajneeti|neta|election|chunav|bitcoin|crypto|share bazaar|stock|nivesh|investment|paise kama|online kama|horoscope|rashifal|kundli)/.test(low))
-    return "Ye sawal mere kaam ka nahi hai — mai sirf <b>is Kali simulator aur iske commands</b> ki madad ke liye bana hu. Koi command samajh na aaye ya terminal me koi error aaye, to wo likho — jaise <code>nmap kaise chalau?</code> — mai wahin se samjha dunga.";
-  /* ---- workflows ---- */
-  if (/(upload|andar (lao|daal|dal)|file (la|daal|dal))/.test(low) && /(photo|image|file|txt|audio|video|jpg|png|mp3|mp4)/.test(low) || /upload kaise/.test(low))
-    return "Apni file andar laane ke 3 tareeke hain:<br>1. Upar wala <b>⬆ Upload</b> button<br>2. Desktop ka <b>Upload File</b> icon<br>3. Files window ka Upload button<br>File usi folder me aa jayegi jahan terminal hai — phir <code>ls</code> me dikhegi, text file <code>cat file.txt</code> se padhegi, aur photo/audio/video Files ke preview me chalegi.";
-  if (/(download)/.test(low) && /(kaise|file|wapas|le)/.test(low))
-    return "File wapas apne device par lene ke liye:<br>1. Files window me file select karke <b>⬇ Download</b> dabao, ya<br>2. Terminal me likho:<br><code>download car.jpeg</code>" + supRunBtn("ls");
-  if (/(git clone|clone)/.test(low))
-    return "GitHub repo clone karna:<br>1. <b>Firefox</b> kholo, address me repo likho — jaise github.com/sherlock-project/sherlock<br>2. Hara <b>Code</b> → <b>Terminal me clone karo</b> dabao — <code>git clone</code> khud chal jayega<br>Ya terminal me seedha:<br><code>git clone https://github.com/sherlock-project/sherlock.git</code><br>Phir <code>cd sherlock</code> aur <code>ls</code> karke andar ki files dekho." + supRunBtn("git clone https://github.com/sherlock-project/sherlock.git");
-  if (/(naya user|new user|username|user (bana|add|kaise)|useradd|adduser)/.test(low))
-    return "Naya user banana:<br><code>useradd rahul</code> (ya <code>adduser rahul</code> — password poochhega)<br>Us user me jaane ke liye:<br><code>su - rahul</code><br>Prompt, home folder aur <code>whoami</code> — teeno badal jayenge. Upar <b>Users / Settings</b> window se bhi user ban sakta hai.";
-  if (/(login|password.*(bhool|nahi chal|galat)|lock)/.test(low))
-    return "Login screen par username pehle se <b>shubham</b> bhara hota hai. Password me <b>kuch bhi</b> likh do — khali nahi chalega. Ye practice login hai: apna <b>asli Kali password yahan kabhi mat daalna</b>, wo is page me kahin use/save nahi hota. Upar <b>🔒 Lock</b> dabane se wapas login screen aati hai.";
-  if (/(rang|colour|color|neel|laal|hari command|syntax)/.test(low) && /(matlab|kyu|kyon|samajh|batao|kaise padh|guide)/.test(low) || /(rang|colour).*(matlab|guide)/.test(low))
-    return "Type karte waqt ke rang:<br><b style='color:#7ee787'>Hari command</b> = naam sahi hai, aage badho<br><b style='color:#ff8a80'>Lal + ghumav underline</b> = naam galat/hai hi nahi — Enter se pehle sudhar lo<br><b style='color:#79c0ff'>Halke neele</b> = flags (-a, --help)<br><b style='color:#5b8def'>Gahri neeli file</b> = wo file is folder me sach me hai<br><b style='color:#e8c15a'>Amber</b> = quotes wala text";
-  if (/(notes|import)/.test(low) && /(command|file|txt|jod|add|kaise)/.test(low))
-    return "Apni notes ki commands jodne ke liye desktop ka <b>Notes Import</b> icon kholo — wahan apni .txt/.md file upload karo ya text paste karke <b>Commands jodo</b> dabao. Backtick (`...`) wali aur numbered commands apne aap jud jayengi aur terminal me chalne lagengi. Note: import sirf isi session ke liye rehta hai, page refresh par dobara import karna padega.";
-  /* ---- errors ---- */
-  if (/command not found|not found.*command|zsh.*not found/.test(low) || (/(nahi chal|nahi ho raha|kaam nahi)/.test(low) && /command/.test(low)))
-    return "<b>command not found</b> ka matlab: wo naam is simulator me hai hi nahi, ya spelling galat hai.<br>1. Naam type karte waqt <b style='color:#ff8a80'>lal</b> ho raha tha? To spelling sudharo<br>2. Asli naam Commands list / Kali Tools window me dekho<br>3. Agar wo tumhari notes wala custom command hai, to pehle <b>Notes Import</b> se import karo<br>4. Script file hai to aage <code>./</code> lagao — jaise <code>./script.sh</code>";
-  if (/no such file|file nahi|nahi mil/.test(low))
-    return "<b>No such file or directory</b> ka matlab: file is folder me nahi hai, ya naam/path galat hai.<br>1. <code>ls</code> chalao — sahi naam wahi dikhega<br>2. Galti se doosre folder me ho to <code>pwd</code> se jagah check karo, <code>cd</code> se sahi jagah jao<br>3. Apni file hai to pehle <b>⬆ Upload</b> se andar lao<br>4. Naam likhte waqt file <b style='color:#5b8def'>neeli</b> ho, tabhi wo sach me yahan hai" + supRunBtn("ls");
-  if (/permission denied|permission/.test(low))
-    return "<b>Permission denied</b> aaye to:<br>1. Script chalani hai to pehle <code>chmod +x file.sh</code> karo, phir <code>./file.sh</code><br>2. System wala kaam hai to aage <code>sudo</code> lagao — jaise <code>sudo apt update</code><br>Ye simulator hai, asli system par kuch nahi bigdega — bejhijhak try karo.";
-  if (/unsupported format|format/.test(low) && /steghide|extract/.test(low))
-    return "Steghide ka <b>unsupported format</b> error tab aata hai jab file asli photo/audio na ho — sabse common wajah: file <b>.enc</b> hai. Pehle use decrypt karo:<br><code>openssl enc -d -aes-256-cbc -salt -in car.jpeg.enc -out car.jpeg</code><br>Phir extract karo:<br><code>steghide extract -sf car.jpeg</code><br>Yaad rahe: steghide file ke <b>content</b> se format pehchanta hai — naam ke peeche .1 laga ho (car.jpeg.1) to bhi chal jata hai, bas andar photo hi honi chahiye.";
-  if (/passphrase|password galat|nahi khul/.test(low) && /steghide|extract|embed|openssl|decrypt/.test(low))
-    return "Passphrase wala dhyaan:<br>1. <b>Embed</b> ke waqt jo passphrase dala tha, <b>extract</b> me bilkul wahi lagega — ek akshar bhi alag hua to data nahi niklega<br>2. OpenSSL me bhi encrypt/decrypt ka password ek hi hona chahiye<br>3. Caps Lock aur galat spelling check kar lo<br>4. Phir bhi na khule to file shayad encrypt (.enc) hai — pehle <code>openssl enc -d ...</code> se decrypt karo, phir steghide extract";
-  if (/error|galti|fail/.test(low) && q.trim().length > 3){
-    var em = q.match(/["']([^"']{3,60})["']/);
-    return "Error samajhne me madad karta hu" + (em ? " — tumne likha: <i>" + esc(em[1]) + "</i>" : "") + ". Kuch aam wajahen:<br>1. Command ka naam lal ho raha tha? Spelling check karo<br>2. File ka naam galat hai to <code>ls</code> se sahi naam dekho<br>3. File .enc hai to steghide se pehle openssl decrypt lagega<br>Agar error ka poora text yahan paste kar doge (ya command ka naam likh doge), to mai usi ki khaas wajah bata dunga." + supRunBtn("ls");
-  }
-  /* ---- specific flows ---- */
-  if (/steghide/.test(low) && /(embed|chhupa|chupa|hide|daal)/.test(low) && !/extract/.test(low))
-    return "Photo me message chhupana (steghide embed):<br><code>steghide embed -ef msg.txt -cf car.jpeg</code>" + supRunBtn("steghide embed -ef msg.txt -cf car.jpeg") + "<br>-ef = chhupani wali file (msg.txt), -cf = cover photo (car.jpeg). <code>embed</code> aur <code>--embed</code> dono chalte hain. Terminal passphrase poochhega — wahi passphrase extract ke waqt lagega, yaad rakhna. Output ka alag naam chahiye to <code>-sf naya.jpeg</code> lagao.";
-  if (/steghide/.test(low) && /(extract|nikaal|nikal|khol)/.test(low))
-    return "Photo se message nikalna (steghide extract):<br><code>steghide extract -sf car.jpeg</code>" + supRunBtn("steghide extract -sf car.jpeg") + "<br>-sf = jisme message chhupa hai. Embed wala hi passphrase lagega. Message wapas <b>msg.txt</b> me aa jayega — <code>cat msg.txt</code> se padh lo. File .enc ho to pehle openssl se decrypt karna padega.";
-  if (/openssl/.test(low) && /(decrypt|khol|wapas)/.test(low))
-    return "OpenSSL se decrypt karna:<br><code>openssl enc -d -aes-256-cbc -salt -in car.jpeg.enc -out car.jpeg</code>" + supRunBtn("openssl enc -d -aes-256-cbc -salt -in car.jpeg.enc -out car.jpeg") + "<br>Decrypt me <code>-d</code> zaroor lagta hai, aur encrypt wala hi password lagega. Dhyaan: tumhare notes wali chipki style (<code>-aes-256-cbc-salt</code>) bhi yahan chalti hai.";
-  if (/openssl/.test(low) || (/(encrypt)/.test(low) && !/gpg/.test(low)))
-    return "OpenSSL se file encrypt karna:<br><code>openssl enc -aes-256-cbc -salt -in car.jpeg -out car.jpeg.enc</code>" + supRunBtn("openssl enc -aes-256-cbc -salt -in car.jpeg -out car.jpeg.enc") + "<br>Terminal password banane ko kahega — wahi password decrypt (<code>-d</code> wali command) me lagega. .enc file banegi, <code>ls</code> me peele rang me dikhegi.";
-  if (/gpg/.test(low))
-    return "GPG se encrypt/decrypt:<br>Encrypt: <code>gpg -c msg.txt</code> → msg.txt.gpg banti hai<br>Decrypt: <code>gpg -d msg.txt.gpg</code><br>Dono baar wahi passphrase lagega jo encrypt ke waqt dala tha." + supRunBtn("gpg -c msg.txt");
-  /* ---- tool / command lookup ---- */
-  var names = supKnownNames();
-  var words = low.split(/\s+/).map(function(w){ return w.replace(/^-+/, ""); }).filter(function(w){ return w.length >= 2; });
-  var found = null;
-  for (var wi = 0; wi < words.length; wi++){ if (names[words[wi]]){ found = words[wi]; break; } }
-  if (found) return supToolAnswer(found, low);
-  /* ---- concepts ---- */
-  if (/(embed)/.test(low)) return "Embed matlab: kisi file (jaise msg.txt) ko doosri file (photo/audio) ke andar chhupana. Is simulator me ye steghide se hota hai:<br><code>steghide embed -ef msg.txt -cf car.jpeg</code>" + supRunBtn("steghide embed -ef msg.txt -cf car.jpeg");
-  if (/(extract)/.test(low)) return "Extract matlab: chhupaya hua data wapas nikalna. Steghide me:<br><code>steghide extract -sf car.jpeg</code>" + supRunBtn("steghide extract -sf car.jpeg") + "<br>Embed wala passphrase hi lagega.";
-  if (/(decrypt)/.test(low)) return "Decrypt matlab: band (encrypted) file ko password se wapas kholna.<br>OpenSSL: <code>openssl enc -d -aes-256-cbc -salt -in file.enc -out file</code><br>GPG: <code>gpg -d file.gpg</code><br>Password wahi lagega jo encrypt ke waqt dala tha.";
-  if (/(hash)/.test(low)) return "Hash ek file/text ka fingerprint hota hai — file badli hai ya nahi, ye check karne ke kaam aata hai.<br><code>sha256sum car.jpeg</code> se hash nikalo<br>Password hash todne ki practice ke liye: <code>john hashes.txt</code> ya <code>hashcat -m 0 hash.txt wordlist.txt</code> (sirf practice files par).";
-  if (/(port|scan)/.test(low)) return "Port scan ke liye is simulator ka main tool hai <b>nmap</b>:<br><code>nmap 127.0.0.1</code>" + supRunBtn("nmap 127.0.0.1") + "<br>Service version dekhne ke liye <code>nmap -sV 127.0.0.1</code>. 127.0.0.1 matlab apni hi (practice) machine.";
-  if (/(wordlist|password.*list|rockyou)/.test(low)) return "Wordlist = passwords ki badi list, jo password tools try karte hain. Is simulator me common naam <b>rockyou.txt</b> aur <b>common.txt</b> chalte hain — jaise <code>hydra -l admin -P rockyou.txt ssh://127.0.0.1</code> ya <code>gobuster dir -u http://127.0.0.1 -w common.txt</code>. Apni wordlist banani ho to <code>crunch</code> ya <code>cewl</code> try karo.";
-  /* ---- closest guess / fallback ---- */
-  var guess = null;
-  for (var gi = 0; gi < words.length && !guess; gi++){ if (words[gi].length >= 4) guess = supClosest(words[gi], names); }
-  if (guess) return "Shayad tum <b>" + esc(guess) + "</b> ki baat kar rahe ho? Naam thoda alag likha lagta hai.<br>" + supToolAnswer(guess, low);
-  var tok = words.filter(function(w){ return /^[a-z][a-z0-9\-]{2,}$/.test(w) && ["kaise","karu","karo","muje","mujhe","batao","samajh","nahi","raha","kya","hai","the","how","use","karna","chala","chalau"].indexOf(w) < 0; })[0];
-  return "Mujhe" + (tok ? " <b>" + esc(tok) + "</b>" : " ye") + " is simulator ke command set me nahi mila. Ek baar ye check karo:<br>1. Naam ki spelling — type karte waqt wo <b style='color:#7ee787'>hara</b> ho raha tha?<br>2. <b>Commands list</b> (terminal ke upar) ya <b>Kali Tools</b> window me sahi naam dekho<br>3. Notes wala apna command hai to pehle <b>Notes Import</b> se import karo<br>Command ka sahi naam likh doge to mai usi ka tareeka + example de dunga.";
-}
-function supAddMsg(html, who){
-  var box = document.getElementById("supportMsgs");
-  if (!box) return;
-  var d = document.createElement("div");
-  d.className = "sup-msg " + (who === "me" ? "me" : "bot");
-  if (who === "me") d.textContent = html; else d.innerHTML = html;
-  box.appendChild(d);
-  box.scrollTop = box.scrollHeight;
-}
-function openSupport(){
-  var p = document.getElementById("supportPanel");
-  if (!p) return;
-  p.classList.add("open");
-  if (!SUPPORT_GREETED){
-    SUPPORT_GREETED = true;
-    supAddMsg("Namaste! Mai <b>Help AI</b> hu — <b>Shubham</b> ke is Kali simulator ka support.<br>Jis command me atke ho, uska naam ya apna error likho — jaise <code>steghide embed kaise karu?</code><br><span style='color:#9fb2c8'>Dhyaan: mai sirf is simulator ke commands ki madad karta hu.</span>", "bot");
-  }
-  var inp = document.getElementById("supportInput");
-  if (inp) setTimeout(function(){ inp.focus(); }, 50);
-}
-function closeSupport(){ var p = document.getElementById("supportPanel"); if (p) p.classList.remove("open"); }
-function toggleSupport(){
-  var p = document.getElementById("supportPanel");
-  if (!p) return;
-  if (p.classList.contains("open")) closeSupport(); else openSupport();
-}
-function supAsk(text){
-  var q = String(text || "").trim();
-  if (!q || SUPPORT_BUSY) return;
-  supAddMsg(q, "me");
-  var inp = document.getElementById("supportInput"); if (inp) inp.value = "";
-  if (SUPPORT_COUNT >= SUPPORT_LIMIT){
-    supAddMsg("Is session ki Help AI limit poori ho gayi hai (zyada galat istemal rokne ke liye sawal seemit rakhe gaye hain). Baaki madad ke liye <b>Help window</b>, terminal ki <b>Commands list</b> aur <code>man &lt;command&gt;</code> use karo.", "bot");
-    return;
-  }
-  SUPPORT_COUNT++;
-  SUPPORT_BUSY = true;
-  var send = document.getElementById("supportSend"); if (send) send.disabled = true;
-  setTimeout(function(){
-    var ans;
-    try { ans = supAnswer(q); } catch(e){ ans = "Kuch gadbad ho gayi — command ka naam dobara likh kar try karo, jaise <code>nmap kaise chalau?</code>"; }
-    supAddMsg(ans, "bot");
-    SUPPORT_BUSY = false;
-    if (send) send.disabled = false;
-    var inp2 = document.getElementById("supportInput"); if (inp2) inp2.focus();
-  }, 350);
-}
-(function initSupport(){
-  var fab = document.getElementById("supportFab"); if (fab) fab.addEventListener("click", toggleSupport);
-  var cl = document.getElementById("supportClose"); if (cl) cl.addEventListener("click", closeSupport);
-  var form = document.getElementById("supportForm");
-  if (form) form.addEventListener("submit", function(ev){ ev.preventDefault(); var inp = document.getElementById("supportInput"); supAsk(inp ? inp.value : ""); });
-  var chips = document.getElementById("supportChips");
-  if (chips) chips.querySelectorAll("[data-q]").forEach(function(b){ b.addEventListener("click", function(){ openSupport(); supAsk(b.getAttribute("data-q")); }); });
-  var msgs = document.getElementById("supportMsgs");
-  if (msgs) msgs.addEventListener("click", function(ev){
-    var b = ev.target && ev.target.closest ? ev.target.closest("[data-run]") : null;
-    if (!b) return;
-    var cmd = b.getAttribute("data-run");
-    closeSupport(); bringTermFront();
-    inputEl.value = cmd;
-    if (typeof updateSyntax === "function") updateSyntax();
-    submitCurrent();
-  });
-  if (typeof CMDS !== "undefined"){
-    CMDS.support = CMDS.madad = CMDS["help-ai"] = function(){
-      emit("Help AI khul raha hai — neeche right side wala panel dekho, wahan apna command doubt likho.", "ok");
-      openSupport();
-    };
-  }
-})();
-
 /* ---------------- boot ---------------- */
 buildFS();
 setStdPrompt();
 initDesktop();
 (function(){ var pw = document.getElementById("loginPass"); if (pw) setTimeout(function(){ pw.focus(); }, 60); else inputEl.focus(); })();
 </script>
+<script>
+/* ================================================================
+   AUTO-SAVE + LEVELS (added 2026-11-05)
+   1) Auto-save: user ka kaam (files, users, history, notes ke
+      commands, level progress) isi browser ke localStorage me
+      save hota rehta hai — sirf USI device/browser me. Site par
+      ya server par kuch upload NAHI hota, dusre visitor ko
+      hamesha fresh simulator milta hai.
+   2) Levels: optional step-by-step learning path (Level 0 se),
+      sirf unke liye jo ★ Levels kholte hain. Baaki sab ke liye
+      terminal pehle jaisa hi free hai.
+   ================================================================ */
+var SIM_KEY = "kaliSimSaveV1";
+var storageOK = false;
+try { localStorage.setItem("__simtest", "1"); localStorage.removeItem("__simtest"); storageOK = true; } catch (e) { storageOK = false; }
+
+/* ---------------- Levels data ---------------- */
+function rx(re) { return function (raw) { return re.test(String(raw || "").trim()); }; }
+function nodeHere(name) { try { return getNode(absPath(name)); } catch (e) { return null; } }
+var LEVELS = [
+  { n: 0, title: "Terminal se Pehchan", lesson: "Terminal ek chat jaisa hai — tum command likhte ho, Kali jawab deta hai. Pehle do sabse basic commands: <b>pwd</b> batata hai tum abhi kis folder me khade ho, aur <b>ls</b> us folder ki files dikhata hai.", steps: [
+    { label: "pwd chalao — current folder dekho", cmd: "pwd", test: rx(/^pwd$/) },
+    { label: "ls chalao — is folder ki files dekho", cmd: "ls", test: rx(/^ls(\s|$)/) } ] },
+  { n: 1, title: "Folder me Ghumna (cd)", lesson: "<b>cd</b> ka matlab hai Change Directory — ek folder se dusre me jana. <b>cd ..</b> ek level upar le jata hai. Tum abhi <b>task</b> folder me ho; upar jaoge to <b>Desktop</b> milega, phir wapas <b>task</b> me aa jao.", steps: [
+    { label: "Upar wale folder me jao", cmd: "cd ..", test: rx(/^cd\s+\.\.\/?$/) },
+    { label: "Wapas task folder me aao", cmd: "cd task", test: rx(/^cd\s+(\/home\/shubham\/Desktop\/)?task\/?$/) } ] },
+  { n: 2, title: "File aur Folder Banana", lesson: "Naya folder banane ke liye <b>mkdir</b> (make directory) aur khali file banane ke liye <b>touch</b> use hota hai. Ye dono Kali ki sabse kaam ki basic commands hain — aage har practical me lagegi.", steps: [
+    { label: "practice naam ka folder banao", cmd: "mkdir practice", test: rx(/^mkdir\s+practice$/) },
+    { label: "hello.txt naam ki file banao", cmd: "touch hello.txt", test: rx(/^touch\s+hello\.txt$/) } ] },
+  { n: 3, title: "File Padhna (cat)", lesson: "<b>cat</b> kisi file ke andar ka text screen par dikhata hai. task folder me pehle se ek <b>msg.txt</b> hai — uske andar ek chhupaya hua secret message hai. Padho to sahi!", steps: [
+    { label: "msg.txt padho — secret message dekho", cmd: "cat msg.txt", test: rx(/^cat\s+(\S+\/)?msg\.txt$/) } ] },
+  { n: 4, title: "Copy, Rename, Delete", lesson: "<b>cp</b> = copy, <b>mv</b> = move/rename, <b>rm</b> = delete. Dhyaan: asal Linux me rm se gayi file wapas nahi aati — yahan practice me koi tension nahi, galti karke hi seekhte hain.", steps: [
+    { label: "msg.txt ki copy banao", cmd: "cp msg.txt copy.txt", test: rx(/^cp\s+(\S+\/)?msg\.txt\s+copy\.txt$/) },
+    { label: "copy.txt ka naam final.txt rakho", cmd: "mv copy.txt final.txt", test: rx(/^mv\s+copy\.txt\s+final\.txt$/) },
+    { label: "final.txt delete karo", cmd: "rm final.txt", test: rx(/^rm\s+final\.txt$/) } ] },
+  { n: 5, title: "Permissions (chmod)", lesson: "Har file/folder ki permission hoti hai — kaun padh sakta hai, likh sakta hai, chala sakta hai. <b>ls -la</b> se permissions dikhti hain (rwx wali line). <b>chmod 700</b> ka matlab: sirf owner ko pura haq, baaki sab ko kuch nahi.", steps: [
+    { label: "Permissions ke saath list dekho", cmd: "ls -la", test: rx(/^ls\s+-[a-z]*l[a-z]*(\s|$)/) },
+    { label: "practice folder ki permission 700 karo", cmd: "chmod 700 practice", test: rx(/^chmod\s+700\s+practice\/?$/) } ] },
+  { n: 6, title: "Naya User Banana", lesson: "Asli Kali/Linux me har bande ka apna user account hota hai. <b>useradd</b> se naya user banta hai aur <b>su</b> se us user me switch hote hain. Yahan ek dost ke naam ka user bana kar dekho — <b>rahul</b>.", steps: [
+    { label: "rahul naam ka user banao", cmd: "useradd rahul", test: function () { return typeof USERS !== "undefined" && !!USERS.rahul; } },
+    { label: "rahul user me switch ho jao", cmd: "su - rahul", test: function (raw) { return rx(/^su\s+(-\s+)?rahul$/)(raw) || (typeof CURRENT_USER !== "undefined" && CURRENT_USER === "rahul"); } } ] },
+  { n: 7, title: "System ki Jaankari", lesson: "Kisi bhi system par baithte hi pehle ye pata lagana chahiye — system kya hai, machine ka naam kya hai. <b>uname -a</b> puri system jaankari deta hai, <b>hostname</b> machine ka naam.", steps: [
+    { label: "System ki puri jaankari dekho", cmd: "uname -a", test: rx(/^uname\s+-[a-z]*a/) },
+    { label: "Machine ka naam dekho", cmd: "hostname", test: rx(/^hostname$/) } ] },
+  { n: 8, title: "File Chhupana (Steghide)", lesson: "Steganography matlab: ek file ko dusri file ke andar chhupana. task folder me <b>msg.txt</b> (secret) aur <b>car.jpeg</b> (photo) pehle se hain. Pehle task folder me ho — <code>cd /home/shubham/Desktop/task</code> — phir neeche wali command chalao. Passphrase puche to khali chhodne ke liye bas <b>Enter</b> dabana (yaad rakhna jo bhi doge).", steps: [
+    { label: "msg.txt ko car.jpeg ke andar chhupao", cmd: "steghide --embed -ef msg.txt -cf car.jpeg", test: function (raw) { var t = String(raw || ""); if (/steghide/.test(t) && /embed/.test(t)) return true; var nd = nodeHere("car.jpeg"); return !!(nd && nd.embedded); } } ] },
+  { n: 9, title: "Encryption (OpenSSL)", lesson: "Encryption matlab file ko aisi bhasa me badalna jo bina password ke koi na padh sake. OpenSSL se car.jpeg ko encrypt karke <b>car.jpeg.enc</b> banegi. Jo password doge wahi decrypt ke time lagega — <b>yaad rakhna</b>.", steps: [
+    { label: "car.jpeg ko encrypt karo", cmd: "openssl enc -aes-256-cbc -salt -in car.jpeg -out car.jpeg.enc", test: function (raw) { var t = String(raw || ""); if (/openssl\s+enc/.test(t) && /car\.jpeg/.test(t)) return true; var nd = nodeHere("car.jpeg.enc"); return !!(nd && nd.enc); } } ] },
+  { n: 10, title: "Network ki Pehchan", lesson: "<b>ifconfig</b> tumhare system ke network addresses (IP waghera) dikhata hai. <b>ping</b> kisi dusri machine/server ko signal bhej kar check karta hai ki connection zinda hai ya nahi.", steps: [
+    { label: "Apna network/IP dekho", cmd: "ifconfig", test: rx(/^(ifconfig(\s|$)|ip\s+a(ddr)?(\s|$))/) },
+    { label: "Google ko ping karke connection check karo", cmd: "ping google.com", test: rx(/^ping\s+\S+/) } ] },
+  { n: 11, title: "Tool Download (Git Clone)", lesson: "Kali ke zyadatar tools GitHub se aate hain. <b>git clone</b> kisi tool ka pura code tumhare folder me download kar deta hai. Koi bhi ek tool clone karke dekho — jaise neeche sqlmap ka example diya hai.", steps: [
+    { label: "Ek tool clone karo", cmd: "git clone https://github.com/sqlmapproject/sqlmap", test: rx(/^git\s+clone\s+\S+/) } ] }
+];
+var LV = { done: [], step: 0 };
+function lvCur() { for (var i = 0; i < LEVELS.length; i++) { if (LV.done.indexOf(i) < 0) return i; } return LEVELS.length; }
+
+function renderLevels() {
+  var list = document.getElementById("levelsList"), det = document.getElementById("levelDetail");
+  if (!list || !det) return;
+  var cur = lvCur(), h = "";
+  LEVELS.forEach(function (L, i) {
+    var done = LV.done.indexOf(i) >= 0;
+    var st, chip;
+    if (done) { st = "border:1px solid #2c5f3a;background:#0f1f16;"; chip = "<span style='color:#7ee787;font-weight:700;'>✔ Complete</span>"; }
+    else if (i === cur) { st = "border:1px solid #e8c15a;background:#221d0d;"; chip = "<span style='color:#e8c15a;font-weight:700;'>▶ Chal raha hai</span>"; }
+    else { st = "border:1px solid #26395a;background:#0c1420;opacity:.65;"; chip = "<span style='color:#8494a9;'>🔒 Band hai</span>"; }
+    h += "<div style='" + st + "border-radius:10px;padding:9px 12px;margin-bottom:7px;display:flex;gap:10px;align-items:center;'>"
+      + "<b style='font-size:16px;color:#fff;min-width:74px;'>Level " + L.n + "</b>"
+      + "<span style='flex:1;color:#dbe4f0;'>" + L.title + "</span>" + chip + "</div>";
+  });
+  list.innerHTML = h;
+  if (cur >= LEVELS.length) {
+    det.innerHTML = "<div style='border:1px solid #e8c15a;background:#221d0d;border-radius:10px;padding:14px;'><b style='color:#e8c15a;font-size:16px;'>🎉 Saare Levels Complete!</b><p style='margin:6px 0 0;line-height:1.55;'>Tumne Level 0 se lekar git clone tak pura safar kar liya. Ab terminal pura tumhara hai — jo chaaho free practice karo. Dobara koi level dekhna ho to terminal me usi command ko phir chala kar dekho.</p></div>";
+    return;
+  }
+  var L = LEVELS[cur];
+  var sh = "<div style='border:1px solid #3a639c;background:#0e1a2c;border-radius:10px;padding:14px;'>"
+    + "<b style='font-size:16px;color:#fff;'>Level " + L.n + " — " + L.title + "</b>"
+    + "<p style='margin:8px 0;line-height:1.6;'>" + L.lesson + "</p>"
+    + "<div style='background:#0a121f;border:1px solid #26395a;border-radius:8px;padding:10px 12px;'><b style='color:#a9cdf7;'>🎯 Task — terminal me ye karo:</b>";
+  L.steps.forEach(function (s, si) {
+    var mark = si < LV.step ? "<span style='color:#7ee787;'>✔</span>" : (si === LV.step ? "<span style='color:#e8c15a;'>➜</span>" : "<span style='color:#8494a9;'>•</span>");
+    sh += "<div style='margin-top:7px;line-height:1.55;'>" + mark + " " + s.label + "<br><code style='background:#12203a;border:1px solid #33507c;border-radius:5px;padding:2px 8px;color:#7ee787;display:inline-block;margin-top:2px;'>" + s.cmd + "</code></div>";
+  });
+  sh += "</div><button type='button' class='wbtn' id='lvGoTerm' style='margin-top:10px;'>&gt;_ Terminal kholo</button></div>";
+  det.innerHTML = sh;
+  var gb = document.getElementById("lvGoTerm");
+  if (gb) gb.addEventListener("click", function () { try { closeWin("levelsWin"); } catch (e) {} try { bringTermFront(); } catch (e) {} try { inputEl.focus(); } catch (e) {} });
+}
+
+function levelOnCommand(raw) {
+  if (!raw) return;
+  var ci = lvCur(); if (ci >= LEVELS.length) return;
+  var L = LEVELS[ci]; var step = L.steps[LV.step]; if (!step) return;
+  var ok = false; try { ok = !!step.test(raw); } catch (e) {}
+  if (!ok) return;
+  LV.step++;
+  if (LV.step >= L.steps.length) {
+    LV.done.push(ci); LV.step = 0;
+    try { printLine('<span style="color:#7ee787;font-weight:700;">★ Level ' + L.n + ' COMPLETE! ' + esc(L.title) + ' — shabash!</span>'); } catch (e) {}
+    if (lvCur() >= LEVELS.length) { try { printLine('<span style="color:#e8c15a;font-weight:700;">🎉 Mubarak ho! Saare levels complete — ab tum beginner nahi rahe. Terminal ab pura tumhara hai!</span>'); } catch (e) {} }
+    else { try { printLine('<span class="dim">Agla level khul gaya: Level ' + LEVELS[lvCur()].n + ' — ' + esc(LEVELS[lvCur()].title) + ' (★ Levels window me dekho)</span>'); } catch (e) {} }
+    try { toast("★ <b>Level " + L.n + " complete!</b> " + esc(L.title)); } catch (e) {}
+  } else {
+    try { printLine('<span style="color:#7ee787;">✓ Step ho gaya (' + LV.step + '/' + L.steps.length + ') — agla step: ' + esc(L.steps[LV.step].label) + '</span>'); } catch (e) {}
+  }
+  renderLevels();
+  saveSession(true);
+}
+
+/* ---------------- Auto-save ---------------- */
+function stripFS(node, hard) {
+  if (!node || typeof node !== "object") return node;
+  var c = {}, k, n;
+  for (k in node) {
+    if (k === "ch") { c.ch = {}; for (n in node.ch) c.ch[n] = stripFS(node.ch[n], hard); }
+    else if (k === "dataUrl") { var du = node.dataUrl || ""; c.dataUrl = (hard || du.length > 150000) ? "" : du; }
+    else if (k === "content" && hard && typeof node.content === "string" && node.content.length > 50000) { c.content = node.content.slice(0, 50000); }
+    else c[k] = node[k];
+  }
+  return c;
+}
+function simSig() {
+  var n = 0;
+  (function walk(x) { if (!x || typeof x !== "object") return; n++; if (x.ch) { for (var k in x.ch) walk(x.ch[k]); } })(typeof FS !== "undefined" ? FS : null);
+  return HIST.length + "|" + CUSTOM_LIST.length + "|" + n + "|" + LV.done.length + "|" + Object.keys(USERS).length + "|" + (typeof CURRENT_USER !== "undefined" ? CURRENT_USER : "");
+}
+var lastSig = "";
+function saveSession(force) {
+  if (!storageOK) return;
+  var sig; try { sig = simSig(); } catch (e) { return; }
+  if (!force && sig === lastSig) return;
+  var data = { v: 1, ts: Date.now(), users: null, hist: [], custom: [], levels: null, fs: null };
+  try {
+    data.users = USERS; data.hist = HIST.slice(-200); data.custom = CUSTOM_LIST;
+    data.levels = { done: LV.done, step: LV.step };
+    data.fs = stripFS(FS, false);
+    localStorage.setItem(SIM_KEY, JSON.stringify(data));
+  } catch (e) {
+    try { data.fs = stripFS(FS, true); localStorage.setItem(SIM_KEY, JSON.stringify(data)); } catch (e2) { return; }
+  }
+  lastSig = sig;
+}
+function applySave(d) {
+  try {
+    if (d.fs) FS = d.fs;
+    if (d.users) USERS = d.users;
+    if (d.hist && d.hist.length) { HIST = d.hist; histIdx = HIST.length; }
+    if (d.custom && d.custom.length) {
+      d.custom.forEach(function (en) {
+        CUSTOM_LIST.push(en);
+        if (!en.builtin && !CUSTOM_CMDS[en.base]) CUSTOM_CMDS[en.base] = makeCustomHandler(en);
+      });
+    }
+    if (d.levels) { LV.done = d.levels.done || []; LV.step = d.levels.step || 0; }
+  } catch (e) {}
+  try { setStdPrompt(); } catch (e) {}
+  try { renderFiles(); } catch (e) {}
+  try { renderUsers(); } catch (e) {}
+  try { printLine('<span class="dim">--- 💾 Purana kaam wapas load ho gaya — jahan chhoda tha, wahi se continue karo! ---</span>'); } catch (e) {}
+}
+
+/* terminal hook — har command ke baad chalta hai */
+function SIMHOOK(raw) {
+  try { levelOnCommand(raw); } catch (e) {}
+  try { saveSession(false); } catch (e) {}
+}
+
+/* ---------------- Resume dialog ---------------- */
+function showResumeDialog(saved) {
+  var when = "";
+  try { when = new Date(saved.ts).toLocaleString("en-IN", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" }); } catch (e) {}
+  var ov = document.createElement("div");
+  ov.id = "simResumeDlg";
+  ov.setAttribute("style", "position:fixed;inset:0;background:rgba(4,10,20,.74);z-index:5000;display:flex;align-items:center;justify-content:center;padding:16px;");
+  ov.innerHTML = "<div style='background:#0e1622;border:1px solid #3a639c;border-radius:14px;max-width:440px;width:100%;padding:22px;color:#dbe4f0;box-shadow:0 24px 60px rgba(0,0,0,.65);'>"
+    + "<div style='font-size:19px;font-weight:800;color:#fff;margin-bottom:6px;'>💾 Purana kaam mila!</div>"
+    + "<p style='margin:0 0 4px;font-size:14px;line-height:1.55;'>Isi browser me tumhara <b>purana saved kaam</b> pada hai" + (when ? " (" + when + " ka)" : "") + ". Kya karna hai?</p>"
+    + "<p style='margin:0 0 16px;font-size:12.5px;color:#9fb2c8;line-height:1.5;'><b style='color:#7ee787;'>Continue</b> = purani files, bane hue users aur level progress wapas milenge.<br><b style='color:#e8c15a;'>Fresh start</b> = sab saaf, bilkul naya simulator.</p>"
+    + "<div style='display:flex;gap:8px;flex-wrap:wrap;'>"
+    + "<button type='button' id='simBtnContinue' style='background:#1f7a3d;color:#fff;border:1px solid #2fae56;border-radius:9px;padding:11px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'>▶ Purana kaam continue karo</button>"
+    + "<button type='button' id='simBtnFresh' style='background:#16233a;color:#cfe0f5;border:1px solid #33507c;border-radius:9px;padding:11px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;'>↺ Fresh start (sab saaf)</button>"
+    + "</div></div>";
+  document.body.appendChild(ov);
+  document.getElementById("simBtnContinue").addEventListener("click", function () {
+    applySave(saved); lastSig = ""; saveSession(true);
+    if (ov.parentNode) ov.parentNode.removeChild(ov);
+    try { toast("💾 <b>Purana kaam wapas aa gaya!</b> Jahan chhoda tha, wahi se continue karo."); } catch (e) {}
+  });
+  document.getElementById("simBtnFresh").addEventListener("click", function () {
+    try { localStorage.removeItem(SIM_KEY); } catch (e) {}
+    location.reload();
+  });
+}
+
+/* ---------------- boot (addon) ---------------- */
+(function simAddonBoot() {
+  /* terminal me 'levels' command */
+  try {
+    if (typeof CMDS !== "undefined" && !CMDS.levels) {
+      CMDS.levels = function () { emit("★ Levels window khul raha hai — Level 0 se step-by-step seekho. Ye optional hai, seekhne walon ke liye.", "ok"); openWin("levelsWin"); renderLevels(); };
+    }
+  } catch (e) {}
+  /* topbar me Reset button */
+  try {
+    var tr = document.querySelector(".top-right");
+    if (tr && !document.getElementById("simResetBtn")) {
+      var b = document.createElement("button");
+      b.type = "button"; b.className = "topbtn"; b.id = "simResetBtn"; b.textContent = "↺ Reset";
+      b.title = "Is browser me saved saara kaam saaf karke bilkul fresh start";
+      b.addEventListener("click", function () {
+        var ok = true;
+        try { ok = confirm("Pakka reset karna hai? Is browser me saved saara kaam (files, users, level progress) saaf ho jayega aur simulator bilkul fresh ho jayega."); } catch (e) { ok = true; }
+        if (!ok) return;
+        try { localStorage.removeItem(SIM_KEY); } catch (e) {}
+        location.reload();
+      });
+      tr.appendChild(b);
+    }
+  } catch (e) {}
+  /* purana save mila to dialog */
+  var saved = null;
+  if (storageOK) { try { saved = JSON.parse(localStorage.getItem(SIM_KEY) || "null"); } catch (e) { saved = null; } }
+  if (saved && saved.fs) { showResumeDialog(saved); }
+  /* periodic auto-save + band hone par save/warning */
+  setInterval(function () { saveSession(false); }, 3500);
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") saveSession(true); });
+  window.addEventListener("beforeunload", function (e) {
+    try { saveSession(true); } catch (err) {}
+    var worked = false;
+    try { worked = HIST.length > 0 || LV.done.length > 0; } catch (err) {}
+    if (worked) { e.preventDefault(); e.returnValue = ""; }
+  });
+})();
+
+</script>
+
 </body>
 </html>
