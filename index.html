@@ -877,6 +877,8 @@ async function dispatch(argv, stdin){
     if (epNode.binary){ emit("zsh: permission denied / cannot execute: " + cmd + " (simulated binary)", "err"); lastStatus = 126; return; }
     return runShellFile(epNode, cmd);
   }
+  if (typeof isDorkToken === "function" && isDorkToken(cmd)){ lastStatus = 0; await runDorkLine(argv); return; }
+  if (/^:[a-z]$/i.test(cmd) && args.join(" ").toLowerCase().indexOf("goto") >= 0){ lastStatus = 0; batchLoopExplain(); return; }
   var fn = CMDS[cmd];
   if (!fn && typeof CUSTOM_CMDS !== "undefined" && CUSTOM_CMDS[cmd]){ lastStatus = 0; await CUSTOM_CMDS[cmd](args, stdin); return; }
   if (!fn){
@@ -1340,7 +1342,24 @@ CMDS.man = function(args){
     chmod:"chmod — file permissions badalta hai. chmod 755 file, chmod +x script.sh",
     rm:"rm — file delete. rm -r folder ke liye, dhyaan se — wapas nahi aata.",
     python3:"python3 — Python interpreter. python3 file.py chalata hai, akele python3 REPL kholta hai.",
-    nano:"nano — terminal ke andar file edit karne wala editor. Ctrl+O save, Ctrl+X bahar."
+    nano:"nano — terminal ke andar file edit karne wala editor. Ctrl+O save, Ctrl+X bahar.",
+    dork:"dork — Google Dorks ki list. site:, filetype:, intitle:, inurl:, -site: jaise operators terminal me seedha likhne se simulated Google results milte hain.",
+    geo:"geo — kisi IP ki location jankari (simulated). geo 8.8.8.8",
+    malwarebazaar:"malwarebazaar — abuse.ch ka malware sample database (defence/research). malwarebazaar <sha256>",
+    anyrun:"anyrun — ANY.RUN online sandbox ki simulated report. anyrun <file>",
+    "hybrid-analysis":"hybrid-analysis — Falcon Sandbox ki simulated verdict report. hybrid-analysis <file>",
+    pikker:"pikker — sandbox.pikker.ee malware checker ki simulated report. pikker <file>",
+    metasploit:"metasploit — notes 53-62 ki theory: Metasploit, payload, exploit, msfvenom, msfconsole, port, Kali IP, trojan — saare concepts. Terminal me 'metasploit' likho.",
+    malware:"malware — notes 44, 46, 47, 48 ki theory: Mirai, SpyNote, FantasyHub, Remcos RAT — pehchan aur bachav. Terminal me 'malware' likho.",
+    mirai:"mirai — IoT devices (camera, DVR, router) ko infect karke botnet banane wala malware (theory, notes 44). Detail ke liye terminal me 'malware' likho.",
+    spynote:"spynote — Android phone ki jasusi karne wala spyware/RAT (theory, notes 46). Detail ke liye terminal me 'malware' likho.",
+    fantasyhub:"fantasyhub — Android RAT jo 'service' ke roop me becha jata hai (MaaS) (theory, notes 47). Detail ke liye terminal me 'malware' likho.",
+    remcos:"remcos — Windows PC ko door se control karne wala RAT (theory, notes 48). Detail ke liye terminal me 'malware' likho.",
+    msfconsole:"msfconsole — Metasploit ka main console. Simulator me basic practice console khulta hai: help, search auxiliary, version, exit. 'msfconsole -q' banner ghata kar khulta hai.",
+    msfvenom:"msfvenom — Metasploit ka payload-generate karne wala tool (sirf theory — simulator me payload banana practice nahi hai).",
+    trojan:"trojan — dikhne me aam file, andar chhupa malware (theory, notes 62). Detail ke liye terminal me 'metasploit' likho.",
+    payload:"payload — exploit ke baad target par chalne wala code-hissa (theory, notes 54).",
+    exploit:"exploit — software ki kamzori ka fayda uthane wala code (theory, notes 55)."
   };
   if (!c){ emit("What manual page do you want?  (jaise: man ls)"); return; }
   if (pages[c]){ emit(c.toUpperCase() + "(1)"); emit(""); emit("NAME"); emit("       " + pages[c]); }
@@ -1356,6 +1375,10 @@ CMDS.help = function(){
   emit("  Packages:  apt update  apt install <pkg>  dpkg -l");
   emit("  Crypto:    steghide embed/extract  openssl enc  gpg -c / gpg -d  base64  md5sum  sha256sum  xxd  strings");
   emit("  Python:    python3 file.py   ya sirf python3 likho to REPL khulega");
+  emit("  Search:    dork  site:example.com  filetype:pdf  intitle:..  inurl:login  -site:youtube.com  (Google Dorks)");
+  emit("  Analysis:  malwarebazaar  anyrun <file>  hybrid-analysis <file>  pikker <file>  geo <ip>  (malware check — defence practice)");
+  emit("  Theory:    metasploit  (notes 53-62 — Metasploit ke concepts, sirf theory)   msfconsole  (basic practice console)");
+  emit("             malware  (notes 44, 46, 47, 48 — Mirai, SpyNote, FantasyHub, Remcos: pehchan aur bachav, sirf theory)");
   emit("  Kisi command ki detail: man <command>   jaise man steghide");
 };
 CMDS.dpkg = function(args){
@@ -1365,6 +1388,169 @@ CMDS.dpkg = function(args){
       if (k !== "steghide") emit("ii  " + (k + "             ").slice(0, 15) + INSTALLED[k] + "        amd64        (simulated package)");
     });
   } else emit("dpkg: --list ya -l use karo: dpkg -l");
+};
+
+/* ---------------- Google Dorks — notes 36-42 ---------------- */
+function isDorkToken(t){
+  return /^(site:|filetype:|intitle:|inurl:|-site:)/i.test(t || "");
+}
+function runDorkLine(argv){
+  var q = argv.join(" ");
+  var site = null, ft = null, intitle = null, inurl = null, excl = null, terms = [];
+  argv.forEach(function(t){
+    var m;
+    if ((m = t.match(/^-site:(.+)$/i))) excl = m[1];
+    else if ((m = t.match(/^site:(.+)$/i))) site = m[1];
+    else if ((m = t.match(/^filetype:(.+)$/i))) ft = m[1];
+    else if ((m = t.match(/^intitle:(.+)$/i))) intitle = m[1];
+    else if ((m = t.match(/^inurl:(.+)$/i))) inurl = m[1];
+    else terms.push(t);
+  });
+  var dom = site || "example.com";
+  if (!site && terms.length){
+    for (var ti = 0; ti < terms.length; ti++){ if (/\./.test(terms[ti]) && !/:/.test(terms[ti])){ dom = terms[ti]; break; } }
+  }
+  emit("Google Dork (simulated search): " + q, "ok");
+  emit("About 5 results (0.42 seconds)");
+  emit("");
+  var res = [];
+  if (ft){
+    var base = (terms.join(" ") || "report").replace(/\s+/g, "-").toLowerCase();
+    res.push(["Annual " + (terms.join(" ") || "Report") + " [" + ft.toUpperCase() + "]", dom + "/files/" + base + "." + ft, "Site par rakhi hui " + ft.toUpperCase() + " file — dork se seedha mil gayi."]);
+    res.push(["Data Sheet [" + ft.toUpperCase() + "]", dom + "/docs/data-sheet." + ft, "Public folder me padi file, search se dikh gayi."]);
+    res.push(["Old Backup [" + ft.toUpperCase() + "]", dom + "/backup/old." + ft, "Purani file — aksar aisi files me sensitive data hota hai, isiliye dorks seekhte hain."]);
+  } else if (inurl){
+    res.push(["Login — " + dom, dom + "/" + inurl, "Site ka login page."]);
+    res.push(["Admin Login", "admin." + dom + "/" + inurl, "Admin panel ka login page."]);
+    res.push(["User Login — Portal", "portal." + dom + "/" + inurl + ".php", "Portal login page."]);
+  } else if (intitle){
+    var ttl = (intitle + " " + terms.join(" ")).trim();
+    res.push([ttl + " — Page 1", dom + "/page1", "Title me '" + ttl + "' wali page."]);
+    res.push([ttl + " — Page 2", dom + "/docs/page2", "Usi title wali dusri page."]);
+    res.push([ttl + " — Analysis", "analysis." + dom + "/report", "Analysis wali page — intitle dork se mili."]);
+  } else {
+    res.push([dom + " — Home", dom + "/", "Site ka main page."]);
+    res.push(["Index of /uploads", dom + "/uploads/", "Khuli directory listing — andar ki files dikh rahi hain (yahi dorks ki power hai)."]);
+    res.push(["robots.txt", dom + "/robots.txt", "Search engines ko roke gaye raste — aksar yahin se hidden pages ka pata chalta hai."]);
+    res.push(["About / Contact", dom + "/about", "Site ki aam jankari wali page."]);
+  }
+  if (excl) emit("(note: " + excl + " ke results hata diye gaye hain — '-site:' wahi karta hai)", "dim");
+  res.forEach(function(r, i){
+    emit((i + 1) + ". " + r[0]);
+    emit("   " + r[1], "dim");
+    emit("   " + r[2]);
+  });
+  emit("");
+  emit("(ye simulated results hain — asal Google par bhi yahi dork likhne se aisi hi list aati hai. Sirf apni ya permission wali sites par hi aise search ka istemal karo.)", "dim");
+}
+CMDS.dork = CMDS.dorks = function(){
+  emit("Google Dorks — Google ke khaas search operators (notes 36-42):", "ok");
+  emit("  site:example.com          sirf usi ek site ke pages search karo");
+  emit("  site:uk                   kisi country ki sites (jaise .uk wali)");
+  emit("  filetype:pdf              sirf PDF files dhundho");
+  emit("  intitle:job introduction  jinke title me ye words hon");
+  emit("  inurl:login               jinke URL me 'login' ho — login pages");
+  emit("  -site:youtube.com         ek site ko results se hata do");
+  emit("Try karo:  site:example.com filetype:pdf    ya    inurl:login example.com");
+  emit("(terminal me dork likhte hi simulated Google results milenge)", "dim");
+};
+function batchLoopExplain(){
+  emit("Ye Windows batch file (.bat) ki mashhoor infinite-loop script hai:", "ok");
+  emit("  :A        <- ek label (bookmark)");
+  emit("  start     <- naya cmd window kholo");
+  emit("  goto A    <- wapas label par jao — loop kabhi khatam hi nahi hota");
+  emit("Asal Windows PC par isse windows khulti jati hain aur system hang ho sakta hai.");
+  emit("Simulator me ye loop NAHI chalaya gaya — sirf concept samjhaya gaya hai. Ise apne ya kisi ke bhi asal PC par mat chalana.", "warn");
+}
+
+/* ---------------- Malware analysis sites — notes 43, 45, 49, 50, 52 ---------------- */
+function fakeHash(str){
+  var h1 = 0xdeadbeef, h2 = 0x41c6ce57, out = "";
+  var s = String(str || "sample");
+  for (var r = 0; r < 4; r++){
+    for (var i = 0; i < s.length; i++){
+      h1 = Math.imul(h1 ^ s.charCodeAt(i), 2654435761);
+      h2 = Math.imul(h2 ^ (s.charCodeAt(i) + r), 1597334677);
+    }
+    out += ("00000000" + (h1 >>> 0).toString(16)).slice(-8) + ("00000000" + (h2 >>> 0).toString(16)).slice(-8);
+  }
+  return out;
+}
+function sampleVerdict(name){
+  if (/\.(exe|apk|bat|scr|dll|msi)$/i.test(name)) return { score: 72, label: "Suspicious" };
+  if (/\.(zip|rar|7z|docm|xlsm)$/i.test(name)) return { score: 45, label: "Dhyaan do — archive/macro file" };
+  return { score: 8, label: "Clean" };
+}
+CMDS.malwarebazaar = function(args){
+  emit("MalwareBazaar — abuse.ch ka malware sample database (simulated)", "ok");
+  var h = args.filter(function(a){ return a.charAt(0) !== "-"; })[0];
+  if (!h){
+    emit("Usage: malwarebazaar <sha256-hash>  — kisi sample ki jankari dekho");
+    emit("Recent samples (simulated):");
+    emit("  9f2c...a41b  PE32 executable (.exe)   first seen: aaj subah");
+    emit("  51bd...77e0  APK (Android)            first seen: kal");
+    emit("  c807...1d9f  PDF document             first seen: 2 din pehle");
+    emit("(ye site asal me researchers/defenders ke liye hai — naye malware samples yahan share hote hain taaki unse bachav seekha jaye)", "dim");
+    return;
+  }
+  emit("SHA256:     " + h);
+  emit("File type:  PE32 executable (simulated)");
+  emit("First seen: 2026-11-18 (simulated)");
+  emit("Verdict:    MALICIOUS — family tag: generic trojan (sirf pehchan ke liye)");
+  emit("Tip: aisa hash VirusTotal / Hybrid Analysis par daal kar puri report milti hai.");
+};
+CMDS.anyrun = CMDS["any.run"] = async function(args){
+  var name = args.filter(function(a){ return a.charAt(0) !== "-"; })[0];
+  emit("ANY.RUN — online sandbox (simulated report)", "ok");
+  if (!name){ emit("Usage: anyrun <file>   jaise: anyrun car.jpeg"); return; }
+  emit("Sample submit ho raha hai: " + name + " ...");
+  await sleep(500);
+  var v = sampleVerdict(name);
+  emit("SHA256: " + fakeHash(name));
+  emit("Analysis time: 40 seconds (simulated) — Windows 10 VM ke andar file chalayi gayi");
+  emit("Processes: 3 chale | Network: 2 DNS requests, " + (v.score > 50 ? "1 suspicious connection" : "0 suspicious connections"));
+  emit("Threat score: " + v.score + "/100 — Verdict: " + v.label);
+  emit("(asal any.run par process tree, network map aur file changes ki puri report milti hai — ye sirf simulated hai)", "dim");
+};
+CMDS["hybrid-analysis"] = CMDS.hybridanalysis = async function(args){
+  var name = args.filter(function(a){ return a.charAt(0) !== "-"; })[0];
+  emit("Hybrid Analysis — Falcon Sandbox (simulated report)", "ok");
+  if (!name){ emit("Usage: hybrid-analysis <file>   jaise: hybrid-analysis car.jpeg"); return; }
+  await sleep(400);
+  var v = sampleVerdict(name);
+  emit("Sample: " + name + "   SHA256: " + fakeHash(name));
+  emit("Verdict: " + (v.score > 50 ? "Suspicious" : v.score > 25 ? "No specific threat — dhyaan do" : "No threats detected"));
+  emit("Threat score: " + v.score + "/100");
+  if (v.score > 50) emit("Indicators: Temp folder me file banayi, ek bahari IP se connection (simulated)");
+  else emit("Indicators: kuch khaas nahi mila (simulated)");
+  emit("(ye report simulated hai — asal site hybrid-analysis.com par milti hai)", "dim");
+};
+CMDS.pikker = async function(args){
+  var name = args.filter(function(a){ return a.charAt(0) !== "-"; })[0];
+  emit("Sandbox.pikker.ee — online malware checker (simulated)", "ok");
+  if (!name){ emit("Usage: pikker <file>   jaise: pikker msg.txt"); return; }
+  await sleep(400);
+  var v = sampleVerdict(name);
+  var det = v.score > 50 ? "23/40 engines ne malicious kaha" : v.score > 25 ? "3/40 engines ne shak kiya" : "0/40 — kisi engine ne nahi pakda";
+  emit("File: " + name + "   SHA256: " + fakeHash(name));
+  emit("Detections: " + det);
+  emit("Verdict: " + v.label);
+  emit("(simulated — asal checker sandbox.pikker.ee par hai)", "dim");
+};
+CMDS.geo = function(args){
+  var ip = args.filter(function(a){ return a.charAt(0) !== "-"; })[0];
+  if (!ip){ emit("usage: geo <ip address>    jaise: geo 8.8.8.8"); return; }
+  if (/^(192\.168\.|10\.|172\.(1[6-9]|2[0-9]|3[01])\.|127\.)/.test(ip)){
+    emit(ip + " — ye PRIVATE IP hai (ghar/office ke local network ki).");
+    emit("Aisi IP ki internet par location nahi milti — ye sirf andar ke network me chalti hai.");
+    return;
+  }
+  emit("IP Geolocation (simulated): " + ip, "ok");
+  if (ip === "8.8.8.8" || ip === "8.8.4.4"){ emit("  Country: United States | City: Mountain View | ISP: Google LLC (Public DNS)"); }
+  else if (ip === "1.1.1.1"){ emit("  Country: Australia | City: Brisbane | ISP: Cloudflare (Public DNS)"); }
+  else { emit("  Country: India | Region: Gujarat | City: Ahmedabad | ISP: Jio / Airtel (simulated)"); }
+  emit("  Timezone: IP ke hisaab se alag ho sakta hai");
+  emit("(note: IP location sirf sheher tak ka andaza deti hai, kisi ka ghar ka address nahi)", "dim");
 };
 
 /* ---------------- packages (apt) ---------------- */
@@ -1423,6 +1609,67 @@ async function aptRun(args){
   emit("apt: subcommand likho — update / install <pkg> / remove <pkg> / search <naam>");
 }
 CMDS.apt = CMDS["apt-get"] = function(args){ return aptRun(args); };
+
+/* ---------------- Malware theory — notes 44, 46, 47, 48 (sirf pehchan aur bachav) ---------------- */
+CMDS.malware = function(){
+  emit("Malware Theory (notes 44, 46, 47, 48) — pehchan aur bachav:", "ok");
+  emit("  44. Mirai — IoT devices (camera, DVR, router) ko infect karne wala botnet malware.");
+  emit("      Failta kaise hai: factory/default password (jaise admin/admin) wale devices ko khud");
+  emit("      dhundh kar infect karta hai, phir un sab ko mila kar bada botnet banata hai — 2016 me");
+  emit("      isse bade DDoS attacks hue the.");
+  emit("      Pehchan: device bina wajah slow, internet slow, data zyada use hona.");
+  emit("      Bachav: device ka default password turant badlo, firmware update rakho, use na ho");
+  emit("      to device band rakho.");
+  emit("  46. SpyNote — Android phone ki jasusi karne wala spyware (RAT = Remote Access Trojan).");
+  emit("      Ye calls, messages, camera aur location chhup kar bahar bhejta hai.");
+  emit("      Failta kaise hai: fake apps, mod APK aur WhatsApp par bheje gaye APK links se —");
+  emit("      Play Store ke bahar se app install karne par.");
+  emit("      Pehchan: battery jaldi khatam, phone garam, data zyada use, ajeeb app permissions.");
+  emit("      Bachav: sirf Play Store se apps lo, unknown APK kabhi install mat karo, app");
+  emit("      permissions check karte raho. Shak ho to woh app uninstall karke antivirus scan karo.");
+  emit("  47. FantasyHub — Android ko target karne wala RAT, jo 'service' ke roop me becha");
+  emit("      jata hai (MaaS — Malware as a Service). Isiliye zyada khatarnak hai: bina zyada");
+  emit("      knowledge wale log bhi ise istemal kar sakte hain.");
+  emit("      Failta kaise hai: fake banking/shopping apps aur phishing links se.");
+  emit("      Pehchan: phone me ajeeb apps, accessibility permission mangi jana, battery/data zyada use.");
+  emit("      Bachav: banking apps sirf official store se, kisi ajeeb app ko accessibility");
+  emit("      permission mat do, 2FA (two-factor) on rakho.");
+  emit("  48. Remcos RAT — Windows PC ko door se control karne wala RAT (Remote Access Trojan).");
+  emit("      Isse keylogging, screen dekhna aur files churana hota hai. 'Remote control tool'");
+  emit("      ke naam par becha jata hai, lekin malware ke roop me bohot use hota hai.");
+  emit("      Failta kaise hai: phishing email ke attachments (Word/Excel/PDF jaisi files) aur");
+  emit("      cracked software ke sath.");
+  emit("      Pehchan: PC slow, webcam/mouse ka ajeeb behaviour, antivirus band mila.");
+  emit("      Bachav: email attachments soch kar kholo, cracked software mat use karo, antivirus");
+  emit("      on aur updated rakho. Shak ho to PC ko network se hata kar full scan karo.");
+  emit("(ye chaaro entries sirf theory hain — inka koi command ya practice is simulator me nahi hai. Defence hi asal cyber security hai.)", "dim");
+};
+
+/* ---------------- Metasploit theory — notes 53-62 ---------------- */
+CMDS.metasploit = function(){
+  emit("Metasploit — Theory (notes 53-62):", "ok");
+  emit("  53. Metasploit — Kali ka sabse mashhoor penetration-testing framework.");
+  emit("      Iske andar hazaron ready-made modules hote hain. Security testers apni hi lab me");
+  emit("      kamzoriyan (vulnerabilities) dhundhne aur test karne ke liye ise use karte hain.");
+  emit("  54. Payload — woh code-hissa jo exploit ke baad target system par chalta hai aur");
+  emit("      apna kaam karta hai. Aasan shabdon me: exploit darwaza kholta hai, payload andar ka kaam hai.");
+  emit("  55. Exploit — kisi software ki kamzori (bug) ka fayda uthane wala code.");
+  emit("      Pehle kamzori milti hai, phir exploit use trigger karta hai.");
+  emit("  56. msfvenom — Metasploit ka payload-generate karne wala tool (sirf theory).");
+  emit("      Is simulator me payload banana practice nahi hai — sirf concept samjho.");
+  emit("  57/60. msfconsole — Metasploit ka main console (terminal wala interface).");
+  emit("      Saare modules yahi se search kiye aur padhe jate hain. Terminal me 'msfconsole'");
+  emit("      likho — basic practice console khulega.");
+  emit("  58. Port no. — har network connection ek port number (darwaze ka number) par hota hai.");
+  emit("      Notes me practice ke liye 444/555 likhe hain (aam practice port 4444 hota hai).");
+  emit("  59. Kali IP — tumhari apni Kali machine ka IP address. Lab ki do machines ek");
+  emit("      dusre ko IP se hi pehchanti hain, isliye IP sabse zaroori cheez hai. 'ip a' se dekho.");
+  emit("  61. msfconsole -q — '-q' matlab quiet: bada banner ghata kar seedha console khulta hai.");
+  emit("  62. Trojan — woh bura program jo dikhne me aam useful file lagta hai, lekin andar");
+  emit("      chhupa malware hota hai. Naam purani Greek kahani 'Trojan Horse' se aaya hai.");
+  emit("      Bachav: unknown files mat kholo — pehle anyrun / pikker jaise sandbox me check karo.");
+  emit("(ye notes sirf theory hain — simulator me Metasploit ka practice hissa sirf basic msfconsole aur 'search auxiliary' hai)", "dim");
+};
 
 /* ---------------- network (simulated) ---------------- */
 var DNS = { "google.com":"142.250.182.206", "www.google.com":"142.250.182.196", "example.com":"93.184.215.14",
@@ -2389,7 +2636,7 @@ document.addEventListener("keydown", function(ev){
 });
 
 /* ---------------- input handling ---------------- */
-var TERM_CMPS = ["ls","cd","pwd","cat","head","tail","echo","touch","mkdir","rmdir","rm","cp","mv","file","stat","chmod","chown","tree","find","grep","wc","sort","uniq","cut","tr","diff","clear","history","whoami","hostname","id","uname","date","uptime","df","free","ps","env","export","which","type","man","help","exit","sudo","apt","apt-get","dpkg","ping","ip","ifconfig","ss","netstat","nslookup","dig","host","curl","wget","nmap","ssh","traceroute","steghide","openssl","gpg","base64","md5sum","sha1sum","sha256sum","sha512sum","xxd","strings","zip","unzip","tar","python3","python","pip3","nano","vim","download","upload","embed","extract","info","enc","version","-ef","-cf","-sf","-xf","-in","-out","-salt","-nosalt","-d","-c","-a","-l","-la","-r","-f","-name","-aes-256-cbc","-aes-128-cbc","-aes-192-cbc","--help","--version"];
+var TERM_CMPS = ["ls","cd","pwd","cat","head","tail","echo","touch","mkdir","rmdir","rm","cp","mv","file","stat","chmod","chown","tree","find","grep","wc","sort","uniq","cut","tr","diff","clear","history","whoami","hostname","id","uname","date","uptime","df","free","ps","env","export","which","type","man","help","exit","sudo","apt","apt-get","dpkg","ping","ip","ifconfig","ss","netstat","nslookup","dig","host","curl","wget","nmap","ssh","traceroute","steghide","openssl","gpg","base64","md5sum","sha1sum","sha256sum","sha512sum","xxd","strings","zip","unzip","tar","python3","python","pip3","nano","vim","download","upload","embed","extract","info","enc","version","-ef","-cf","-sf","-xf","-in","-out","-salt","-nosalt","-d","-c","-a","-l","-la","-r","-f","-name","-aes-256-cbc","-aes-128-cbc","-aes-192-cbc","--help","--version","dork","dorks","geo","malwarebazaar","anyrun","any.run","hybrid-analysis","hybridanalysis","pikker","metasploit","msfconsole","msfvenom","malware","mirai","spynote","fantasyhub","remcos","site:","filetype:","intitle:","inurl:","-site:"];
 function completeInput(){
   var val = inputEl.value;
   if (!val) return;
@@ -2560,6 +2807,17 @@ var CMD_GROUPS = [
     ["searchsploit apache","Exploit-DB me dhundho"],["exiftool car.jpeg","Photo ki metadata dekho"],
     ["wifite","WiFi tools ka menu"],["setoolkit","Social-Engineer Toolkit menu"],
     ["nuclei -u http://127.0.0.1","Template based vuln scan"],["john hashes.txt","Password hashes crack practice"]
+  ]},
+  { h:"Google Dorks — search tricks", items:[
+    ["dork","Saare dork operators ki list"],["site:example.com","Sirf ek site ke andar search"],
+    ["site:example.com filetype:pdf","Site ki PDF files dhundho"],["filetype:pdf report","PDF files search"],
+    ["intitle:job introduction","Title me ye words wali pages"],["inurl:login example.com","Login pages dhundho"],
+    ["-site:youtube.com hacking notes","Ek site hata kar search"]
+  ]},
+  { h:"Malware Analysis Sites — file check (defence)", items:[
+    ["malwarebazaar","Malware samples ki jankari (abuse.ch)"],["anyrun car.jpeg","Sandbox me file ki report (simulated)"],
+    ["hybrid-analysis car.jpeg","Sandbox verdict / threat score (simulated)"],["pikker msg.txt","Online malware checker (simulated)"],
+    ["geo 8.8.8.8","IP ki location jankari"]
   ]}
 ];
 var cmdModal = document.getElementById("cmdModal");
@@ -2979,7 +3237,8 @@ var TOOL_CATS = [
   { h:"Forensics Tools", tools:["exiftool","binwalk","foremost","volatility3","autopsy","testdisk","photorec","bulk-extractor","dc3dd","ddrescue","guymager","scalpel","sleuthkit","hashdeep","ssdeep"] },
   { h:"Reverse Engineering", tools:["radare2","gdb","ghidra","objdump","apktool","jadx","frida","dex2jar","ltrace","strace","checksec","cutter","ropper","pwntools","edb-debugger","valgrind"] },
   { h:"Social Engineering", tools:["maltego","king-phisher","gophish"] },
-  { h:"System Services & Misc", tools:["sqlite3","mysql","netcat","socat","hping3","curl","wget","sslscan","sslyze","ike-scan","onesixtyone","snmp-check","smtp-user-enum","braa"] }
+  { h:"System Services & Misc", tools:["sqlite3","mysql","netcat","socat","hping3","curl","wget","sslscan","sslyze","ike-scan","onesixtyone","snmp-check","smtp-user-enum","braa"] },
+  { h:"Malware Analysis (Online Sites)", tools:["malwarebazaar","anyrun","hybrid-analysis","pikker"] }
 ];
 var TOOL_INFO = {
   "nmap":["Network exploration tool and security / port scanner","7.94"], "masscan":["TCP port scanner, bahut tez","1.3.2"], "rustscan":["Modern fast port scanner","2.1.1"],
@@ -3006,7 +3265,9 @@ var TOOL_INFO = {
   "radare2":["Reverse engineering framework","5.9.4"], "gdb":["GNU Debugger","15.1"], "ghidra":["Software reverse engineering (GUI)","11.2"], "objdump":["Object file disassembler","2.43"],
   "apktool":["Android APK reverse engineering","2.10"], "jadx":["Dex to Java decompiler","1.5.0"], "frida":["Dynamic instrumentation toolkit","16.5"], "dex2jar":["Dex to jar converter","2.4"], "ltrace":["Library call tracer","0.7.91"], "strace":["System call tracer","6.11"], "checksec":["Binary security properties checker","2.6"],
   "maltego":["Link analysis / OSINT visualization (GUI)","4.7"], "king-phisher":["Phishing campaign toolkit","1.16"], "gophish":["Open-source phishing toolkit","0.12.1"],
-  "sqlite3":["SQLite database shell","3.46"], "mysql":["MySQL client","8.0"], "netcat":["TCP/UDP swiss-army knife (nc)","1.10"], "socat":["Multipurpose relay","1.8"], "hping3":["TCP/IP packet assembler","3.0"]
+  "sqlite3":["SQLite database shell","3.46"], "mysql":["MySQL client","8.0"], "netcat":["TCP/UDP swiss-army knife (nc)","1.10"], "socat":["Multipurpose relay","1.8"], "hping3":["TCP/IP packet assembler","3.0"],
+  "malwarebazaar":["Malware sample database — abuse.ch (defence/research website)","web"], "anyrun":["ANY.RUN online sandbox — file chala kar report (website)","web"],
+  "hybrid-analysis":["Falcon Sandbox — malware analysis report (website)","web"], "pikker":["Sandbox.pikker.ee — online malware checker (website)","web"]
 };
 function toolCatOf(name){ for (var i = 0; i < TOOL_CATS.length; i++) if (TOOL_CATS[i].tools.indexOf(name) >= 0) return TOOL_CATS[i].h; return "Tools"; }
 function toolInfo(name){ return TOOL_INFO[name] || ["Kali tool — practice ke liye simulated", "1.0"]; }
@@ -3077,47 +3338,53 @@ function makeGenericTool(name){
 })();
 
 /* ---- specific tool behaviours ---- */
-CMDS.msfconsole = async function(){
-  emit("       =[ metasploit v6.4.43-dev                          ]");
-  emit("+ -- --=[ 2476 exploits - 1241 auxiliary - 431 payloads   ]");
-  emit("+ -- --=[ 1619 post - 49 encoders - 13 nops               ]");
-  emit("Metasploit tip: 'search <naam>' se module dhundho, 'use <module>' se chuno,");
-  emit("'show options' dekho, phir 'run'. Bahar nikalne ke liye: exit");
-  var mod = null;
+CMDS.msfconsole = async function(args){
+  var quiet = args && (args.indexOf("-q") >= 0 || args.indexOf("--quiet") >= 0);
+  if (quiet){
+    emit("msfconsole (simulated — quiet mode: banner skip ho gaya)", "dim");
+  } else {
+    emit("       =[ metasploit v6.4.43-dev                          ]");
+    emit("+ -- --=[ 2476 exploits - 1241 auxiliary - 431 payloads   ]");
+    emit("+ -- --=[ 1619 post - 49 encoders - 13 nops               ]");
+    emit("msfconsole (simulated — basic practice console): 'help' se practice commands dekho.");
+    emit("Bahar nikalne ke liye: exit");
+  }
   while (true){
-    var label = mod ? ("msf " + mod + " > ") : "msf > ";
-    var line = await waitInput(label, false);
+    var line = await waitInput("msf > ", false);
     if (line === null){ lastStatus = 130; return; }
-    var parts = String(line).trim().split(/\s+/), c = (parts[0] || "").toLowerCase();
-    if (c === "exit" || c === "quit") { emit("(msfconsole band — wapas terminal par)", "dim"); return; }
-    if (c === "help" || c === "?"){ emit("Core Commands: help, use, back, search, show options, set, run, info, exit"); continue; }
-    if (c === "use"){ mod = parts[1] ? ("exploit(" + parts[1].split("/").pop() + ")") : null; if (parts[1]) emit("Module chuna: " + parts[1] + " — ab 'show options' dekho, phir 'run'"); continue; }
-    if (c === "back"){ mod = null; continue; }
-    if (c === "search"){ emit("Matching Modules (simulated):"); emit("   0  exploit/multi/handler            generic payload handler"); emit("   1  auxiliary/scanner/portscan/tcp   TCP port scanner"); emit("   2  exploit/windows/smb/ms17_010     MS17-010 EternalBlue (lab reference)"); continue; }
-    if (c === "show" && parts[1] === "options"){ if (mod){ emit("Module options:"); emit("   RHOSTS   127.0.0.1   yes   target host"); emit("   RPORT    445         yes   target port"); emit("   LHOST    192.168.1.10 yes  local host"); } else emit("pehle 'use <module>' karo"); continue; }
-    if (c === "set"){ emit(parts[1] + " => " + (parts[2] || "") + " (simulated set)"); continue; }
-    if (c === "run" || c === "exploit"){ if (!mod){ emit("pehle module chuno: use exploit/multi/handler"); continue; } emit("[*] Started reverse TCP handler on 192.168.1.10:4444"); await sleep(400); emit("[*] Meterpreter session 1 opened (simulated) — 127.0.0.1 se connection"); emit("(session sirf practice ke liye simulated hai)"); continue; }
-    if (c === "version" || c === "-v"){ emit("Framework Version: 6.4.43-dev"); continue; }
+    var parts = String(line).trim().split(/\s+/).filter(Boolean), c = (parts[0] || "").toLowerCase();
     if (!c) continue;
+    if (c === "exit" || c === "quit") { emit("(msfconsole band — wapas terminal par)", "dim"); return; }
+    if (c === "help" || c === "?"){
+      emit("Practice Commands:");
+      emit("  help              ye list");
+      emit("  search auxiliary  auxiliary (scanner/info) modules ki list");
+      emit("  version           framework version");
+      emit("  exit / quit       wapas Kali terminal par");
+      continue;
+    }
+    if (c === "search" && (parts[1] || "").toLowerCase() === "auxiliary"){
+      emit("Matching Modules (auxiliary — scanner/info, simulated):");
+      emit("   auxiliary/scanner/portscan/tcp          TCP port scanner — khule ports dekhta hai");
+      emit("   auxiliary/scanner/http/http_version     web server ka version pehchanta hai");
+      emit("   auxiliary/scanner/ftp/ftp_version       FTP service ka version banner deta hai");
+      emit("   auxiliary/scanner/ssh/ssh_version       SSH service ka version banner deta hai");
+      emit("   auxiliary/scanner/smb/smb_version       SMB service ki jankari deta hai");
+      emit("   auxiliary/gather/search_email_collector kisi domain ke email addresses khojta hai (info gathering)");
+      continue;
+    }
+    if (c === "version" || c === "-v"){ emit("Framework Version: 6.4.43-dev"); continue; }
+    if (c === "use" || c === "set" || c === "exploit" || c === "run" || c === "show"){ emit("Ye practice is simulator ka hissa nahi hai — yahan sirf theory aur 'search auxiliary' practice hai."); continue; }
+    if (c === "search"){ emit("Is simulator me sirf 'search auxiliary' practice hai."); continue; }
     emit("Unknown command: " + c + " — 'help' likho", "err");
   }
 };
-CMDS.msfvenom = function(args){
-  if (!args.length || args.indexOf("-l") >= 0 || args.indexOf("--help") >= 0 || args.indexOf("-h") >= 0){
-    emit("MsfVenom — Payload Generator");
-    emit("Usage: msfvenom -p <payload> LHOST=<ip> LPORT=<port> -f <format> -o <file>");
-    emit("Example: msfvenom -p linux/x64/meterpreter/reverse_tcp LHOST=192.168.1.10 LPORT=4444 -f elf -o shell.elf");
-    emit("Payloads: linux/x64/meterpreter/reverse_tcp, windows/meterpreter/reverse_tcp, android/meterpreter/reverse_tcp");
-    return;
-  }
-  var oi = args.indexOf("-o"), out = oi >= 0 ? args[oi + 1] : null;
-  var pi = args.indexOf("-p"), pay = pi >= 0 ? args[pi + 1] : "generic payload";
-  emit("[-] No platform was selected, choosing Msf::Module::Platform::Linux from the payload");
-  emit("[-] No arch selected, selecting arch: x64 from the payload");
-  emit("No encoder specified, outputting raw payload");
-  emit("Payload size: 130 bytes");
-  emit("Final size of elf file: 250 bytes");
-  if (out){ var inf = ensureParentMsg("msfvenom", out); if (inf) inf.parent.ch[inf.name] = mkFile("", { binary:true, size:250, seed:"msfvenom-" + pay, perm:"rwxr-xr-x" }); emit("Saved as: " + out + " (simulated payload file — asli me ye sirf lab me use hota hai)"); }
+CMDS.msfvenom = function(){
+  emit("msfvenom — Metasploit ka payload-generate karne wala tool hai (theory, notes 56).", "ok");
+  emit("Concept: framework ke modules ke liye payload file isi tool se banti hai —");
+  emit("isiliye iska naam 'venom' (zeher) rakha gaya hai.");
+  emit("Is simulator me payload banana practice NAHI hai — sirf theory samjho.");
+  emit("'metasploit' command se notes 53-62 ki puri theory padho.");
 };
 CMDS.sqlmap = async function(args){
   var ui = args.indexOf("-u"), url = ui >= 0 ? args[ui + 1] : null;
@@ -3626,6 +3893,8 @@ function isKnownBase(name){
   if (!name) return false;
   if (CMDS[name]) return true;
   if (CUSTOM_CMDS[name]) return true;
+  if (/^(site:|filetype:|intitle:|inurl:|-site:)/i.test(name)) return true;
+  if (/^:[a-z]$/i.test(name)) return true;
   return false;
 }
 function highlightCommandHTML(str){
